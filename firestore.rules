@@ -1,0 +1,76 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) { 
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_-]+$'); 
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+
+    function isValidPlayerObject(playerData) {
+      return playerData.keys().hasAll(['name', 'joinedAt'])
+        && playerData.name is string 
+        && playerData.name.size() > 0
+        && playerData.joinedAt is timestamp;
+    }
+
+    function isValidGame(data) {
+      return data.keys().hasAll(['ownerId', 'status', 'createdAt', 'players'])
+        && data.ownerId == request.auth.uid 
+        && data.status in ['waiting', 'playing', 'finished']
+        && data.createdAt is timestamp
+        && data.players is map 
+        && request.auth.uid in data.players
+        && isValidPlayerObject(data.players[request.auth.uid]);
+    }
+
+    match /games/{gameId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn() && request.auth.uid in existing().players;
+
+      allow create: if isSignedIn() && isValidId(gameId) && isValidGame(incoming());
+      
+      allow update: if isSignedIn() && isValidId(gameId) && (
+        // Action: Join Game
+        (
+          incoming().diff(existing()).affectedKeys().hasOnly(['players']) &&
+          incoming().players.keys().size() <= 7 &&
+          incoming().players.keys().size() == existing().players.keys().size() + 1 &&
+          request.auth.uid in incoming().players &&
+          !(request.auth.uid in existing().players) &&
+          isValidPlayerObject(incoming().players[request.auth.uid]) &&
+          existing().status == 'waiting'
+        ) ||
+        // Action: Update Status
+        (
+          existing().ownerId == request.auth.uid &&
+          incoming().diff(existing()).affectedKeys().hasOnly(['status']) &&
+          incoming().status in ['waiting', 'playing', 'finished'] &&
+          existing().status != 'finished'
+        )
+      );
+
+      match /actions/{actionId} {
+        allow read: if isSignedIn() && request.auth.uid in existing().playerIds;
+          
+        allow create: if isSignedIn() 
+          && isValidId(actionId) 
+          && incoming().keys().hasAll(['uid', 'type', 'createdAt', 'playerIds'])
+          && incoming().uid == request.auth.uid
+          && incoming().type in ['throw', 'smash']
+          && incoming().createdAt is timestamp
+          && incoming().playerIds is list
+          && request.auth.uid in incoming().playerIds
+          && exists(/databases/$(database)/documents/games/$(gameId));
+          
+        allow update, delete: if false;
+      }
+    }
+  }
+}
+

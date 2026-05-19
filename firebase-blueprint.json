@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "Game": {
+      "title": "Game Room",
+      "description": "Represents a multiplayer game session",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "status": { "type": "string", "enum": ["waiting", "playing", "finished"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "players": { 
+          "type": "object",
+          "additionalProperties": {
+             "type": "object",
+             "properties": {
+               "name": { "type": "string" },
+               "joinedAt": { "type": "string", "format": "date-time" }
+             },
+             "required": ["name", "joinedAt"]
+          }
+        }
+      },
+      "required": ["ownerId", "status", "createdAt", "players"]
+    },
+    "Action": {
+      "title": "Game Action",
+      "description": "An action taken by a player (throw card, or smash)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "type": { "type": "string", "enum": ["throw", "smash"] },
+        "cardValue": { "type": "integer" },
+        "pattern": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "playerIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["uid", "type", "createdAt", "playerIds"]
+    }
+  },
+  "firestore": {
+    "games/{gameId}": {
+      "schema": { "$ref": "#/entities/Game" },
+      "description": "Main game room document (includes players map)"
+    },
+    "games/{gameId}/actions/{actionId}": {
+      "schema": { "$ref": "#/entities/Action" },
+      "description": "Chronological events representing gameplay"
+    }
+  }
+}
