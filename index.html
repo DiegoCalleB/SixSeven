@@ -349,6 +349,34 @@
         transform: translate(2px, 2px);
         box-shadow: 1px 1px 0 var(--holo-4);
       }
+      .btn-exit {
+        font-family: "Space Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        color: black;
+        background: var(--holo-3);
+        border: 2px solid black;
+        border-radius: 4px;
+        padding: 3px 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        margin-top: 5px;
+        transition:
+          transform 0.1s ease,
+          background 0.1s ease;
+        box-shadow: 2px 2px 0 black;
+        align-self: center;
+        pointer-events: auto;
+      }
+      .btn-exit:hover {
+        background: white;
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 black;
+      }
+      .btn-exit:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 black;
+      }
 
       /* ---- PRE-MATCH ---- */
       .matchup {
@@ -469,7 +497,7 @@
         padding: 12px 14px;
         background: black;
         border-bottom: 3px solid white;
-        pointer-events: none;
+        pointer-events: auto;
         flex-shrink: 0;
         gap: 8px;
         box-shadow: 0 4px 0 var(--holo-3);
@@ -505,6 +533,34 @@
       .player-tag.right .score {
         color: var(--holo-1);
         text-shadow: 2px 2px 0 white;
+      }
+      .streak-fire {
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 11px;
+        color: var(--holo-4);
+        background: rgba(255, 34, 0, 0.15);
+        border: 2px solid var(--holo-4);
+        padding: 2px 6px;
+        margin-top: 4px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        animation: firePulse 0.4s ease-in-out infinite alternate;
+        box-shadow: 0 0 8px rgba(255, 34, 0, 0.4);
+      }
+      @keyframes firePulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 8px rgba(255, 34, 0, 0.4);
+        }
+        100% {
+          transform: scale(1.05);
+          box-shadow: 0 0 14px rgba(255, 34, 0, 0.7);
+        }
       }
 
       .game-title-center {
@@ -1078,14 +1134,20 @@
       <div class="game-header">
         <div class="player-tag left">
           <div class="name" id="nameLeft">Jugador 1</div>
+          <div class="streak-fire" id="streakLeft" style="display: none">
+            🔥 racha: 1
+          </div>
           <div class="score" id="scoreLeft">0</div>
         </div>
         <div class="game-title-center">
           <div class="title">six seven</div>
-          <div class="sub">primero a 3</div>
+          <button class="btn-exit" onclick="exitToMenu()">Salir ↩</button>
         </div>
         <div class="player-tag right">
           <div class="name" id="nameRight">Jugador 2</div>
+          <div class="streak-fire" id="streakRight" style="display: none">
+            🔥 racha: 1
+          </div>
           <div class="score" id="scoreRight">0</div>
         </div>
       </div>
@@ -1199,6 +1261,27 @@
         el.style.transform = "translate(-50%, -50%)";
         lane.appendChild(el);
         setTimeout(() => el.remove(), 1000);
+      }
+
+      function triggerHaptic(type) {
+        if (navigator.vibrate) {
+          try {
+            if (type === "win") {
+              navigator.vibrate(50); // Small, crisp vibration for winning standard points
+            } else if (type === "fail") {
+              navigator.vibrate([100, 50, 100]); // Stronger, grave double vibration for incorrect taps
+            } else if (type === "round-win") {
+              navigator.vibrate([150, 60, 150, 60, 300]); // Rhythmic, celebratory pattern for winning a master round
+            } else if (type === "tap") {
+              navigator.vibrate(15); // Tiny tick on simple interactions/smashes
+            }
+          } catch (e) {
+            console.warn(
+              "Haptic feedback not supported or barred by browser policy.",
+              e,
+            );
+          }
+        }
       }
 
       function $(id) {
@@ -1367,6 +1450,13 @@
         $("startKingBtn").disabled = true;
         showScreen("home");
       }
+      function exitToMenu() {
+        gameActive = false;
+        clearTimeout(cardTimer);
+        scoreLeft = 0;
+        scoreRight = 0;
+        goHome();
+      }
       function goDuel() {
         mode = "duel";
         topName = "Jugador 1";
@@ -1472,14 +1562,22 @@
         if (mode === "duel") {
           leftName = "Jugador 1";
           rightName = "Jugador 2";
+          $("streakLeft").style.display = "none";
+          $("streakRight").style.display = "none";
         } else {
           if (kingIdx === null) {
             leftName = topName;
             rightName = bottomName;
+            $("streakLeft").style.display = "none";
+            $("streakRight").style.display = "none";
           } else {
             // El rey va a la izquierda, el retador a la derecha (sin rotaciones, todos miran igual)
             leftName = "👑 " + topName;
             rightName = bottomName;
+            // Mostramos la racha actual del Rey en el lado izquierdo con estética de fuego 🔥
+            $("streakLeft").style.display = "inline-flex";
+            $("streakLeft").innerHTML = `🔥 racha: ${currentStreak}`;
+            $("streakRight").style.display = "none";
           }
         }
         $("nameLeft").textContent = leftName;
@@ -1679,6 +1777,7 @@
         clearTimeout(cardTimer);
         const laneStr = side === "left" ? "laneLeft" : "laneRight";
         if (w.win) {
+          triggerHaptic("win");
           if (window.confetti) {
             confetti({
               particleCount: 100,
@@ -1714,6 +1813,7 @@
             finishRound(scoreLeft >= 3 ? "left" : "right");
           }
         } else {
+          triggerHaptic("fail");
           sayFail(); // 🔊 "No, no, no!"
           spawnFloatingText("-1", "var(--holo-4)", laneStr);
           document.body.classList.add("shake");
@@ -1750,6 +1850,7 @@
       function finishRound(winnerSide) {
         gameActive = false;
         clearTimeout(cardTimer);
+        triggerHaptic("round-win");
         // En modo duel, leftName/rightName son genéricos; en modo king, left = rey/jugador
         const winnerName =
           winnerSide === "left"
