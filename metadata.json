@@ -1,6 +1,6 @@
 {
   "name": "SixSeven",
-  "description": "Fast-paced multiplayer game where you smash cards on 6 and 7 matches.",
+  "description": "Juego competitivo de reflejos Six Seven con regla de Muerte Súbita por 2 puntos de ventaja, IA rival adaptativa y panel de telemetría para TFM.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
