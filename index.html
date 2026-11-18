@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>SixSeven</title>
+    <meta
+      name="description"
+      content="Juego competitivo de reflejos Six Seven con regla de Muerte Súbita por 2 puntos de ventaja y modo multijugador arcade."
+    />
+    <meta property="og:title" content="SixSeven" />
+    <meta
+      name="og:description"
+      content="Juego competitivo de reflejos Six Seven con regla de Muerte Súbita por 2 puntos de ventaja y modo multijugador arcade."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,7 +36,7 @@
         --holo-3: #00ffff;
         --holo-4: #ff2200;
         --bg-deep: #111;
-        --glass: rgba(0, 0, 0, 0.8);
+        --glass: rgba(0, 0, 0, 0.85);
         --glass-strong: rgba(255, 255, 255, 0.1);
         --border: #fff;
       }
@@ -69,7 +78,7 @@
       }
       .screen.active {
         display: flex;
-        animation: fadeIn 0.4s;
+        animation: fadeIn 0.35s ease-out;
       }
       @keyframes fadeIn {
         from {
@@ -89,29 +98,28 @@
       }
       .logo {
         font-family: "Anton", sans-serif;
-        font-size: clamp(80px, 25vw, 160px);
-        line-height: 0.85;
+        font-size: clamp(64px, 18vw, 130px);
+        line-height: 0.88;
         letter-spacing: 2px;
-        background: var(--holo-1);
-        -webkit-text-stroke: 3px black;
         color: var(--holo-1);
-        text-shadow: 4px 4px 0 var(--holo-2);
+        -webkit-text-stroke: 3px black;
+        text-shadow: 6px 6px 0 var(--holo-2);
       }
       .sparkle {
         display: inline-block;
-        font-size: clamp(40px, 10vw, 70px);
+        font-size: clamp(34px, 9vw, 60px);
         vertical-align: middle;
-        margin-left: -5px;
+        margin-left: 4px;
         font-family: "Permanent Marker", cursive;
         color: var(--holo-3);
         -webkit-text-stroke: 2px black;
         transform: rotate(15deg);
       }
       .tagline {
-        font-family: "Space Mono";
+        font-family: "Space Mono", monospace;
         font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 0.2em;
+        font-size: 13px;
+        letter-spacing: 0.18em;
         color: var(--holo-3);
         margin-top: 12px;
         text-transform: uppercase;
@@ -125,8 +133,8 @@
       .mode-stack {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        margin-top: 44px;
+        gap: 16px;
+        margin-top: 34px;
         width: 100%;
         max-width: 380px;
       }
@@ -137,8 +145,8 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 18px;
-        padding: 22px 24px;
+        gap: 16px;
+        padding: 18px 20px;
         transition:
           transform 0.1s,
           box-shadow 0.1s;
@@ -146,2982 +154,1764 @@
         box-shadow: 6px 6px 0 var(--holo-3);
         border-radius: 0;
       }
-      .glass-card:nth-child(even) {
+      .glass-card:nth-child(2) {
+        box-shadow: 6px 6px 0 var(--holo-1);
+      }
+      .glass-card:nth-child(3) {
         box-shadow: 6px 6px 0 var(--holo-2);
       }
       .glass-card:active {
         transform: translate(4px, 4px);
-        box-shadow: 2px 2px 0 currentColor;
+        box-shadow: 2px 2px 0 var(--holo-3);
       }
-
       .mode-emoji {
-        font-size: 46px;
+        font-size: 36px;
         line-height: 1;
-        filter: drop-shadow(2px 2px 0 black);
+        filter: drop-shadow(2px 2px 0 #000);
       }
       .mode-info {
         flex: 1;
       }
       .mode-title {
         font-family: "Anton", sans-serif;
-        font-size: 32px;
-        line-height: 1;
-        margin-bottom: 4px;
+        font-size: 26px;
         letter-spacing: 1px;
         color: white;
-        text-shadow: 2px 2px 0 black;
+        line-height: 1.05;
       }
       .mode-desc {
         font-size: 11px;
         color: #ccc;
-        line-height: 1.4;
-        font-weight: 700;
-      }
-      .mode-arrow {
-        font-family: "Anton", sans-serif;
-        font-size: 32px;
-        color: var(--holo-1);
-        -webkit-text-stroke: 1px black;
+        margin-top: 3px;
+        line-height: 1.3;
       }
 
-      .footer-note {
-        margin-top: 32px;
-        font-size: 11px;
-        letter-spacing: 0.25em;
-        color: rgba(255, 255, 255, 0.5);
-        text-transform: uppercase;
-        font-weight: bold;
-        background: black;
-        padding: 4px 8px;
-      }
-
-      /* ---- SETUP REY ---- */
-      .setup-title {
-        font-family: "Anton", sans-serif;
-        font-size: 64px;
-        line-height: 1;
-        color: var(--holo-1);
-        -webkit-text-stroke: 2px black;
-        text-shadow: 4px 4px 0 var(--border);
-        text-align: center;
-        transform: rotate(2deg);
-      }
-      .setup-sub {
-        font-size: 12px;
-        letter-spacing: 0.2em;
-        color: var(--holo-3);
-        font-weight: bold;
-        text-transform: uppercase;
-        margin: 12px 0 28px;
-        background: black;
-        padding: 6px;
-        border: 2px solid white;
-        transform: rotate(-1deg);
-      }
-
-      .input-row {
-        width: 100%;
-        max-width: 380px;
+      .home-actions-row {
+        margin-top: 18px;
         display: flex;
-        gap: 8px;
-      }
-      .player-input {
-        flex: 1;
-        padding: 16px 18px;
-        border: 3px solid var(--border);
-        background: #000;
-        color: white;
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 16px;
-        box-shadow: 4px 4px 0 var(--holo-2);
-        text-transform: uppercase;
-      }
-      .player-input:focus {
-        outline: none;
-        border-color: var(--holo-1);
-      }
-      .player-input::placeholder {
-        color: #666;
-      }
-      .btn-add {
-        padding: 0 22px;
-        border: 3px solid var(--border);
-        background: var(--holo-1);
-        color: #000;
-        font-family: "Anton", sans-serif;
-        font-size: 28px;
-        cursor: pointer;
-        box-shadow: 4px 4px 0 var(--holo-2);
-        transition: transform 0.1s;
-      }
-      .btn-add:active {
-        transform: translate(4px, 4px);
-        box-shadow: 0 0 0 transparent;
-      }
-
-      .player-list {
-        width: 100%;
-        max-width: 380px;
-        margin: 24px 0;
-        display: flex;
+        gap: 10px;
         flex-wrap: wrap;
-        gap: 12px;
         justify-content: center;
-        min-height: 50px;
-      }
-      .player-chip {
-        background: var(--holo-3);
-        border: 3px solid black;
-        color: black;
-        padding: 6px 10px 4px 14px;
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 14px;
-        display: flex;
         align-items: center;
-        gap: 10px;
-        box-shadow: 3px 3px 0 white;
-        animation: chipIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-        transform: rotate(calc(-3deg + 6deg * var(--rand-rot, 0)));
-      }
-      @keyframes chipIn {
-        from {
-          transform: scale(0);
-        }
-        to {
-          transform: scale(1);
-        }
-      }
-      .player-chip .remove {
-        cursor: pointer;
-        color: black;
-        font-weight: bold;
-        font-family: "Permanent Marker", cursive;
-        font-size: 20px;
-        line-height: 1;
-        padding: 0 4px;
-      }
-      .player-chip .remove:hover {
-        color: var(--holo-4);
       }
 
-      .btn-primary {
-        font-family: "Anton", sans-serif;
-        font-size: 32px;
-        letter-spacing: 2px;
-        padding: 14px 48px;
-        border: 3px solid black;
-        background: var(--holo-1);
-        color: black;
-        box-shadow: 6px 6px 0 white;
-        cursor: pointer;
-        transition: transform 0.1s;
-        margin-top: 16px;
-        text-transform: uppercase;
-      }
-      .btn-primary:active {
-        transform: translate(4px, 4px);
-        box-shadow: 2px 2px 0 white;
-      }
-      .btn-primary:disabled {
-        background: #333;
-        color: #666;
-        cursor: not-allowed;
-        box-shadow: 6px 6px 0 #555;
-        border-color: #555;
-      }
-
-      .btn-back {
+      .btn-rules-home {
         background: black;
         color: white;
         border: 2px solid white;
-        padding: 8px 18px;
-        font-family: "Space Mono";
+        padding: 8px 14px;
+        font-family: "Space Mono", monospace;
         font-weight: 700;
         font-size: 12px;
-        text-transform: uppercase;
         cursor: pointer;
-        margin-top: 24px;
-        box-shadow: 3px 3px 0 var(--holo-4);
+        box-shadow: 4px 4px 0 var(--holo-1);
+        text-transform: uppercase;
       }
-      .btn-back:active {
+      .btn-rules-home:active {
         transform: translate(2px, 2px);
-        box-shadow: 1px 1px 0 var(--holo-4);
-      }
-      .btn-exit {
-        font-family: "Space Mono", monospace;
-        font-size: 10px;
-        font-weight: 700;
-        color: black;
-        background: var(--holo-3);
-        border: 2px solid black;
-        border-radius: 4px;
-        padding: 3px 8px;
-        cursor: pointer;
-        text-transform: uppercase;
-        margin-top: 5px;
-        transition:
-          transform 0.1s ease,
-          background 0.1s ease;
-        box-shadow: 2px 2px 0 black;
-        align-self: center;
-        pointer-events: auto;
-      }
-      .btn-exit:hover {
-        background: white;
-        transform: translate(-1px, -1px);
-        box-shadow: 3px 3px 0 black;
-      }
-      .btn-exit:active {
-        transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0 black;
+        box-shadow: 2px 2px 0 var(--holo-1);
       }
 
-      /* ---- PRE-MATCH ---- */
-      .matchup {
-        text-align: center;
-      }
-      .matchup-label {
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        color: var(--holo-3);
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-        background: black;
-        padding: 6px;
-        border: 2px solid white;
-        display: inline-block;
-      }
-      .crown {
-        font-size: 80px;
-        animation: floaty 2s ease-in-out infinite;
-        filter: drop-shadow(4px 4px 0 black);
-      }
-      @keyframes floaty {
-        0%,
-        100% {
-          transform: translateY(0) rotate(5deg);
-        }
-        50% {
-          transform: translateY(-8px) rotate(-5deg);
-        }
-      }
-      .king-name,
-      .challenger-name {
-        font-family: "Anton", sans-serif;
-        font-size: 64px;
-        line-height: 1;
-        -webkit-text-stroke: 2px black;
-      }
-      .king-name {
-        background: var(--holo-1);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        text-shadow: 4px 4px 0 var(--border);
-        transform: rotate(-2deg);
-      }
-      .challenger-name {
-        background: var(--holo-3);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        text-shadow: 4px 4px 0 var(--border);
-        transform: rotate(2deg);
-      }
-      .streak-pill {
-        display: inline-block;
-        margin-top: 8px;
-        padding: 6px 14px;
-        background: var(--holo-4);
-        border: 3px solid black;
-        font-size: 14px;
-        font-family: "Space Mono";
-        font-weight: 700;
-        color: black;
-        box-shadow: 2px 2px 0 white;
-        text-transform: uppercase;
-        transform: rotate(-3deg);
-      }
-      .vs {
-        font-family: "Permanent Marker", cursive;
-        font-size: 40px;
-        color: var(--holo-2);
-        -webkit-text-stroke: 1px black;
-        text-shadow: 2px 2px 0 white;
-        margin: 18px 0;
-      }
-      .queue {
-        margin-top: 32px;
-        width: 100%;
-        max-width: 380px;
-        background: black;
-        border: 3px solid white;
-        padding: 16px 20px;
-        box-shadow: 6px 6px 0 var(--holo-1);
-      }
-      .queue-label {
-        font-family: "Space Mono";
+      .btn-wildcard-toggle {
+        background: #141414;
+        color: #999;
+        border: 2px solid #555;
+        padding: 8px 14px;
+        font-family: "Space Mono", monospace;
         font-weight: 700;
         font-size: 12px;
-        color: var(--holo-1);
-        text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-      .queue-list {
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 14px;
-        color: white;
-      }
-
-      /* ---- JUEGO ---- */
-      .game {
-        display: none;
-        flex-direction: column;
-        height: 100%;
-        position: fixed;
-        inset: 0;
-        z-index: 2;
-      }
-      .game.active {
-        display: flex;
-      }
-
-      .game-header {
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
-        padding: 12px 14px;
-        background: black;
-        border-bottom: 3px solid white;
-        pointer-events: auto;
-        flex-shrink: 0;
-        gap: 8px;
-        box-shadow: 0 4px 0 var(--holo-3);
-      }
-      .player-tag {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        min-width: 70px;
-      }
-      .player-tag.right {
-        align-items: flex-end;
-      }
-      .player-tag .name {
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: white;
-        line-height: 1.4;
-      }
-      .player-tag .score {
-        font-family: "Anton", sans-serif;
-        font-size: 38px;
-        line-height: 1;
-        -webkit-text-stroke: 1px black;
-      }
-      .player-tag.left .score {
-        color: var(--holo-3);
-        text-shadow: 2px 2px 0 white;
-      }
-      .player-tag.right .score {
-        color: var(--holo-1);
-        text-shadow: 2px 2px 0 white;
-      }
-      .streak-fire {
-        font-family: "Space Mono", monospace;
-        font-weight: 700;
-        font-size: 11px;
-        color: var(--holo-4);
-        background: rgba(255, 34, 0, 0.15);
-        border: 2px solid var(--holo-4);
-        padding: 2px 6px;
-        margin-top: 4px;
-        border-radius: 4px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: inline-flex;
-        align-items: center;
-        gap: 3px;
-        animation: firePulse 0.4s ease-in-out infinite alternate;
-        box-shadow: 0 0 8px rgba(255, 34, 0, 0.4);
-      }
-      .combo-badge {
-        font-family: "Space Mono", monospace;
-        font-weight: 700;
-        font-size: 10px;
-        color: #ff00ff;
-        background: rgba(255, 0, 255, 0.15);
-        border: 2px solid #ff00ff;
-        padding: 2px 6px;
-        margin-top: 2px;
-        border-radius: 4px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: inline-flex;
-        align-items: center;
-        gap: 3px;
-        animation: comboPulse 0.3s ease-in-out infinite alternate;
-        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-      }
-      @keyframes comboPulse {
-        0% { transform: scale(1); box-shadow: 0 0 6px rgba(255, 0, 255, 0.4); }
-        100% { transform: scale(1.08); box-shadow: 0 0 16px rgba(255, 0, 255, 0.8); }
-      }
-      @keyframes firePulse {
-        0% {
-          transform: scale(1);
-          box-shadow: 0 0 8px rgba(255, 34, 0, 0.4);
-        }
-        100% {
-          transform: scale(1.05);
-          box-shadow: 0 0 14px rgba(255, 34, 0, 0.7);
-        }
-      }
-
-      .speed-meter-wrap {
-        width: 100%;
-        background: #111;
-        border-bottom: 2px solid #333;
-        display: flex;
-        align-items: center;
-        position: relative;
-        height: 18px;
-        overflow: hidden;
-      }
-      .speed-bar-fill {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 15%;
-        background: linear-gradient(90deg, var(--holo-3), var(--holo-1), var(--holo-4));
-        transition: width 0.3s ease-out;
-        opacity: 0.85;
-      }
-      .speed-meter-label {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        text-align: center;
-        font-family: "Space Mono", monospace;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        color: white;
-        text-shadow: 1px 1px 0 black;
-        text-transform: uppercase;
-      }
-
-      .match-point-banner {
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-        background: var(--holo-4);
-        color: black;
-        font-family: "Anton", sans-serif;
-        font-size: 14px;
-        letter-spacing: 2px;
-        padding: 4px 14px;
-        border: 2px solid white;
-        box-shadow: 0 0 15px rgba(255, 34, 0, 0.8), 3px 3px 0 black;
-        animation: bannerFlash 0.5s ease-in-out infinite alternate;
-        display: none;
-        pointer-events: none;
-        white-space: nowrap;
-      }
-      @keyframes bannerFlash {
-        0% { transform: translateX(-50%) scale(0.96); opacity: 0.9; }
-        100% { transform: translateX(-50%) scale(1.04); opacity: 1; filter: brightness(1.2); }
-      }
-
-      .key-badge {
-        display: inline-block;
-        background: white;
-        color: black;
-        border: 1px solid black;
-        font-family: "Space Mono", monospace;
-        font-size: 10px;
-        font-weight: 900;
-        padding: 1px 5px;
-        border-radius: 3px;
-        margin-right: 4px;
-        box-shadow: 1px 1px 0 black;
-        vertical-align: middle;
-      }
-
-      .game-title-center {
-        text-align: center;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .game-title-center .title {
-        font-family: "Anton", sans-serif;
-        font-size: 26px;
-        line-height: 1;
-        color: var(--holo-1);
-        -webkit-text-stroke: 1px black;
-        text-shadow: 2px 2px 0 var(--holo-2);
-      }
-      .game-title-center .sub {
-        font-size: 10px;
-        color: var(--holo-3);
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-top: 2px;
-      }
-
-      .arena {
-        flex: 1;
-        display: flex;
-        position: relative;
-        overflow: hidden;
-      }
-      .lane {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
         cursor: pointer;
-        touch-action: manipulation;
-        transition: background 0.15s;
-        overflow: hidden;
-        padding: 16px;
+        box-shadow: 4px 4px 0 #000;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.12s;
       }
-      .lane.left {
-        background: repeating-linear-gradient(
-          45deg,
-          rgba(0, 255, 255, 0.05),
-          rgba(0, 255, 255, 0.05) 10px,
-          transparent 10px,
-          transparent 20px
+      .btn-wildcard-toggle.active {
+        color: #000;
+        border-color: #fff;
+        background: linear-gradient(
+          90deg,
+          #ccff00 0% 25%,
+          #ff00ff 25% 50%,
+          #00ffff 50% 75%,
+          #ff2200 75% 100%
         );
+        box-shadow: 4px 4px 0 #fff;
       }
-      .lane.right {
-        background: repeating-linear-gradient(
-          -45deg,
-          rgba(255, 0, 255, 0.05),
-          rgba(255, 0, 255, 0.05) 10px,
-          transparent 10px,
-          transparent 20px
-        );
+      .btn-wildcard-toggle .wc-label {
+        background: rgba(0, 0, 0, 0.82);
+        color: #fff;
+        padding: 2px 7px;
       }
-      .arena::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        width: 4px;
-        background: white;
-        pointer-events: none;
-        z-index: 1;
-      }
-      .lane.flash-win {
-        animation: flashWin 0.5s;
-      }
-      .lane.flash-fail {
-        animation: flashFail 0.5s;
-      }
-      @keyframes flashWin {
-        0%,
-        100% {
-          background-color: transparent;
-        }
-        50% {
-          background-color: var(--holo-1);
-        }
-      }
-      @keyframes flashFail {
-        0%,
-        100% {
-          background-color: transparent;
-        }
-        25%,
-        75% {
-          background-color: var(--holo-4);
-        }
-      }
-      @keyframes shake {
-        0% {
-          transform: translate(2px, 2px) rotate(0deg);
-        }
-        10% {
-          transform: translate(-2px, -3px) rotate(-1deg);
-        }
-        20% {
-          transform: translate(-4px, 0px) rotate(1deg);
-        }
-        30% {
-          transform: translate(4px, 3px) rotate(0deg);
-        }
-        40% {
-          transform: translate(2px, -2px) rotate(1deg);
-        }
-        50% {
-          transform: translate(-2px, 3px) rotate(-1deg);
-        }
-        60% {
-          transform: translate(-4px, 2px) rotate(0deg);
-        }
-        70% {
-          transform: translate(4px, 2px) rotate(-1deg);
-        }
-        80% {
-          transform: translate(-2px, -2px) rotate(1deg);
-        }
-        90% {
-          transform: translate(2px, 3px) rotate(0deg);
-        }
-        100% {
-          transform: translate(2px, -3px) rotate(-1deg);
-        }
-      }
-      body.shake {
-        animation: shake 0.3s;
-      }
-
-      .floating-text {
-        position: absolute;
-        font-family: "Anton", sans-serif;
-        font-size: 80px;
-        color: white;
-        text-shadow: 4px 4px 0 black;
-        -webkit-text-stroke: 2px black;
-        pointer-events: none;
-        z-index: 50;
-        animation: floatUp 0.8s ease-out forwards;
-        opacity: 1;
-      }
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
-        80% {
-          transform: translateY(-100px) scale(1.2);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-120px) scale(1.3);
-          opacity: 0;
-        }
-      }
-
-      .card {
-        width: min(42vw, 200px);
-        aspect-ratio: 5 / 7;
-        position: relative;
-        color: black;
-        box-shadow: 8px 8px 0 black;
-        border: 4px solid black;
-        overflow: hidden;
-        pointer-events: none;
-        background: white;
-        border-radius: 0;
-        transition: transform 0.15s ease-out;
-      }
-      .card::before {
-        display: none;
-      }
-      .card .num-big {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Anton", sans-serif;
-        font-size: clamp(80px, 24vw, 130px);
-        line-height: 1;
-        text-shadow: 4px 4px 0 var(--holo-4);
-        color: black;
-      }
-      .card.double .num-big {
-        font-size: clamp(58px, 18vw, 100px);
-        letter-spacing: 0;
-      }
-      .card .num-corner {
-        position: absolute;
-        font-family: "Anton", sans-serif;
-        font-size: clamp(16px, 4vw, 22px);
-        line-height: 1;
-      }
-
-      /* Cartas Especiales Virales */
-      .card.wild-rainbow {
-        background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3) !important;
-        background-size: 1600% 1600% !important;
-        animation: rainbowShift 3s ease infinite, cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 0 25px rgba(255, 0, 255, 0.9), 8px 8px 0 black !important;
-        border: 4px solid white !important;
-      }
-      .card.wild-rainbow .num-big {
-        color: white !important;
-        text-shadow: 3px 3px 0 black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black !important;
-      }
-      @keyframes rainbowShift {
-        0%{background-position:0% 82%}
-        50%{background-position:100% 19%}
-        100%{background-position:0% 82%}
-      }
-
-      .card.gold-jackpot {
-        background: linear-gradient(135deg, #ffe066, #ffcc00, #ff9900, #ffd700) !important;
-        animation: goldShimmer 1.2s ease-in-out infinite alternate, cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 0 35px rgba(255, 215, 0, 1), 8px 8px 0 black !important;
-        border: 4px solid #ffffff !important;
-      }
-      .card.gold-jackpot .num-big {
-        color: black !important;
-        text-shadow: 2px 2px 0 #ffffff !important;
-        font-size: clamp(52px, 16vw, 90px) !important;
-      }
-      @keyframes goldShimmer {
-        0% { filter: brightness(1); }
-        100% { filter: brightness(1.35) drop-shadow(0 0 12px gold); }
-      }
-
-      .card.bomb-trap {
-        background: radial-gradient(circle, #440000 0%, #150000 100%) !important;
-        border: 4px solid #ff0033 !important;
-        animation: bombPulse 0.35s ease-in-out infinite alternate, cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 0 30px rgba(255, 0, 0, 0.9), 8px 8px 0 black !important;
-      }
-      .card.bomb-trap .num-big {
-        font-size: clamp(65px, 20vw, 110px) !important;
-        color: #ff3333 !important;
-        text-shadow: 0 0 20px #ff0000 !important;
-      }
-      @keyframes bombPulse {
-        0% { transform: scale(0.97); box-shadow: 0 0 10px rgba(255,0,0,0.6); }
-        100% { transform: scale(1.03); box-shadow: 0 0 35px rgba(255,0,0,1); }
-      }
-
-      .card.glitch-trap {
-        background: #0d0d0d !important;
-        border: 4px solid #ff0055 !important;
-        animation: glitchJitter 0.2s steps(2) infinite, cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 0 20px rgba(255, 0, 85, 0.7), 8px 8px 0 black !important;
-      }
-      .card.glitch-trap .num-big {
-        color: #00ffff !important;
-        text-shadow: -3px 0 #ff0055, 3px 0 #00ff66 !important;
-      }
-      @keyframes glitchJitter {
-        0% { transform: translate(0, 0); }
-        50% { transform: translate(-2px, 2px); }
-        100% { transform: translate(2px, -2px); }
-      }
-
-      /* Modal de Reglas y Cartas */
-      .rules-card {
-        background: rgba(20, 20, 20, 0.96);
-        border: 3px solid white;
-        box-shadow: 10px 10px 0 black;
-        padding: 20px;
-        max-width: 380px;
-        width: 90%;
-        text-align: left;
-        max-height: 85vh;
-        overflow-y: auto;
-      }
-      .rules-title {
-        font-family: "Anton", sans-serif;
-        font-size: 24px;
+      .btn-wildcard-toggle.active .wc-label {
+        background: #000;
         color: var(--holo-1);
-        text-transform: uppercase;
-        margin-bottom: 12px;
-        text-align: center;
-        letter-spacing: 1px;
-      }
-      .rule-item {
-        margin-bottom: 14px;
-        font-size: 13px;
-        line-height: 1.4;
-        color: #ddd;
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-      }
-      .rule-badge {
-        font-size: 22px;
-        line-height: 1;
-        flex-shrink: 0;
-      }
-      .card .num-corner.tl {
-        top: 10px;
-        left: 12px;
-      }
-      .card .num-corner.br {
-        bottom: 10px;
-        right: 12px;
-        transform: rotate(180deg);
-      }
-      .card.entering {
-        animation: cardIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
-      }
-      @keyframes cardIn {
-        0% {
-          transform: perspective(600px) rotateY(-100deg) scale(0.5)
-            rotate(-6deg);
-          opacity: 0;
-        }
-        100% {
-          transform: perspective(600px) rotateY(0deg) scale(1) rotate(0deg);
-          opacity: 1;
-        }
       }
 
-      .meme-anim {
-        position: absolute;
-        bottom: 12%;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        pointer-events: none;
-        z-index: 5;
-        white-space: nowrap;
-        text-align: center;
-        filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
-      }
-      .lane.flash-win .meme-anim {
-        opacity: 1;
-        animation: memeBop 0.15s ease-in-out infinite alternate;
-      }
-      @keyframes memeBop {
-        0% {
-          transform: translate(-50%, 10px) scale(1);
-        }
-        100% {
-          transform: translate(-50%, -15px) scale(1.05);
-        }
-      }
-      .meme-face {
-        font-size: 70px;
-        line-height: 1;
-        position: relative;
-        z-index: 2;
-        margin: 0 auto;
-        display: inline-block;
-      }
-      .meme-hand {
-        font-size: 40px;
-        position: absolute;
-        bottom: -10px;
-        z-index: 1;
-      }
-      .meme-hand.l {
-        left: -50px;
-        transform: rotate(-15deg);
-      }
-      .meme-hand.r {
-        right: -50px;
-        transform: rotate(15deg);
-      }
-
-      .tap-hint {
-        margin-top: 18px;
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 13px;
-        letter-spacing: 2px;
-        color: var(--holo-1);
-        text-transform: uppercase;
-        pointer-events: none;
-        background: black;
-        padding: 4px 8px;
-        border: 2px solid white;
-        transform: rotate(2deg);
-      }
-
-      /* ---- COUNTDOWN ---- */
-      .countdown {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
-        z-index: 100;
-        font-family: "Anton", sans-serif;
-        font-size: 260px;
-        color: var(--holo-1);
-        -webkit-text-stroke: 4px black;
-        text-shadow: 8px 8px 0 white;
-        line-height: 1;
-        pointer-events: none;
-      }
-      .countdown.active {
-        display: flex;
-      }
-      .countdown.bump {
-        animation: bump 0.9s;
-      }
-      @keyframes bump {
-        0% {
-          transform: scale(0);
-          opacity: 0;
-        }
-        30% {
-          transform: scale(1.2);
-          opacity: 1;
-        }
-        70% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: scale(2);
-          opacity: 0;
-        }
-      }
-
-      /* ---- MODALES ---- */
-      .modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        z-index: 90;
-        padding: 24px;
-        touch-action: manipulation;
-      }
-      .modal.active {
-        display: flex;
-        animation: fadeIn 0.3s;
-      }
-      .winner-emoji {
-        font-size: 80px;
-        animation: bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      }
-      @keyframes bounce {
-        0% {
-          transform: scale(0);
-        }
-        100% {
-          transform: scale(1);
-          filter: drop-shadow(4px 4px 0 var(--holo-1));
-        }
-      }
-      .winner-title {
-        font-family: "Anton", sans-serif;
-        font-size: clamp(64px, 18vw, 120px);
-        line-height: 0.9;
-        color: var(--holo-1);
-        -webkit-text-stroke: 3px black;
-        text-shadow: 6px 6px 0 white;
-        text-align: center;
-        transform: rotate(-3deg);
-      }
-      .winner-name {
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 26px;
-        margin-top: 18px;
-        color: white;
-        text-align: center;
-        background: black;
-        padding: 6px 12px;
-        border: 2px solid white;
-        transform: rotate(2deg);
-      }
-      .winner-detail {
-        margin-top: 12px;
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 13px;
-        letter-spacing: 0.2em;
-        color: var(--holo-3);
-        text-transform: uppercase;
-        text-align: center;
-      }
-      .modal-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 32px;
-        width: 100%;
-        max-width: 320px;
-        align-items: center;
-      }
-
-      /* ---- LEADERBOARD ---- */
-      .leaderboard {
-        width: 100%;
-        max-width: 380px;
-        background: black;
-        border: 3px solid white;
-        padding: 20px;
-        margin-top: 24px;
-        box-shadow: 6px 6px 0 var(--holo-4);
-      }
-      .lb-title {
-        font-family: "Anton", sans-serif;
-        font-size: 32px;
-        text-align: center;
-        margin-bottom: 14px;
-        color: var(--holo-4);
-        letter-spacing: 1px;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 2px 2px 0 white;
-      }
-      .lb-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 4px;
-        border-bottom: 2px solid #333;
-        font-family: "Space Mono";
-        font-weight: 700;
-        font-size: 15px;
-      }
-      .lb-row:last-child {
-        border: none;
-      }
-      .lb-rank {
-        font-family: "Permanent Marker", cursive;
-        font-size: 24px;
-        width: 28px;
-        color: #555;
-        text-align: center;
-      }
-      .lb-row.first .lb-rank {
-        color: var(--holo-1);
-        text-shadow: 1px 1px 0 black;
-      }
-      .lb-name {
-        flex: 1;
-        font-weight: 700;
-      }
-      .lb-wins {
-        font-size: 13px;
-        color: #aaa;
-      }
-
-      /* Mini referencia de los símbolos ganadores */
       .legend {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
         margin-top: 18px;
-        padding: 8px 16px;
-        background: black;
-        border: 3px solid white;
         font-size: 12px;
-        font-family: "Space Mono";
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        color: white;
-        text-transform: uppercase;
-        box-shadow: 4px 4px 0 var(--holo-2);
-        transform: rotate(1deg);
-      }
-      .legend .pair {
-        font-size: 18px;
+        color: #bbb;
+        text-align: center;
+        letter-spacing: 1px;
       }
       .legend b {
         font-family: "Anton", sans-serif;
-        font-size: 24px;
+        font-size: 22px;
         color: var(--holo-1);
         -webkit-text-stroke: 1px black;
       }
 
-      /* Muerte Súbita Banner Estilo Alta Tensión */
-      .match-point-banner.sudden-death {
-        background: linear-gradient(90deg, #ffd700, #ff8800) !important;
-        color: #000 !important;
-        border: 2px solid #fff !important;
-        box-shadow: 0 0 25px rgba(255, 215, 0, 1), 4px 4px 0 black !important;
-        animation: suddenPulse 0.4s ease-in-out infinite alternate !important;
+      /* ---- KING SETUP ---- */
+      .setup-box {
+        width: 100%;
+        max-width: 400px;
+        background: #161616;
+        border: 3px solid white;
+        padding: 22px;
+        box-shadow: 8px 8px 0 var(--holo-2);
       }
-      @keyframes suddenPulse {
-        0% { transform: translateX(-50%) scale(0.97); filter: brightness(1); }
-        100% { transform: translateX(-50%) scale(1.05); filter: brightness(1.25) drop-shadow(0 0 10px gold); }
+      .setup-title {
+        font-family: "Anton", sans-serif;
+        font-size: 34px;
+        color: var(--holo-1);
+        -webkit-text-stroke: 1.5px black;
+        text-shadow: 3px 3px 0 var(--holo-2);
+        text-align: center;
+      }
+      .setup-sub {
+        font-size: 11px;
+        color: #ccc;
+        text-align: center;
+        margin-top: 4px;
+        margin-bottom: 16px;
+      }
+      .input-row {
+        display: flex;
+        gap: 8px;
+      }
+      .input-row input {
+        flex: 1;
+        background: black;
+        border: 2px solid white;
+        color: white;
+        padding: 10px 12px;
+        font-family: "Space Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        outline: none;
+      }
+      .input-row input:focus {
+        border-color: var(--holo-1);
+      }
+      .btn-add {
+        background: var(--holo-1);
+        color: black;
+        border: 2px solid white;
+        padding: 0 16px;
+        font-family: "Anton", sans-serif;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .chips-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+        min-height: 48px;
+        max-height: 170px;
+        overflow-y: auto;
+      }
+      .chip {
+        background: black;
+        border: 2px solid var(--holo-3);
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .chip span {
+        cursor: pointer;
+        color: var(--holo-4);
+        font-weight: 900;
+      }
+      .setup-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
       }
 
-      /* Modal de Telemetría TFM & Rendimiento Cognitivo */
-      .telemetry-card {
-        background: rgba(12, 16, 24, 0.98);
-        border: 3px solid var(--holo-1);
-        box-shadow: 10px 10px 0 black;
-        padding: 22px;
-        max-width: 440px;
-        width: 95%;
+      .btn-primary {
+        background: var(--holo-1);
+        color: black;
+        border: 3px solid black;
+        outline: 2px solid white;
+        padding: 12px 22px;
+        font-family: "Anton", sans-serif;
+        font-size: 22px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: 4px 4px 0 var(--holo-2);
+        text-transform: uppercase;
+      }
+      .btn-primary:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 var(--holo-2);
+      }
+      .btn-secondary {
+        background: #222;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 16px;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+
+      /* ---- GAME SCREEN (SIDE-BY-SIDE UPRIGHT, TAP CARDS DIRECTLY) ---- */
+      #game {
+        padding: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      #game.active {
+        display: flex;
+      }
+
+      .hud-bar {
+        width: 100%;
+        background: #0b0b0b;
+        border-bottom: 3px solid var(--border);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        z-index: 10;
+      }
+      .icon-btn {
+        background: black;
+        color: white;
+        border: 2px solid white;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 3px 3px 0 var(--holo-3);
+        flex-shrink: 0;
+      }
+      .icon-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0 var(--holo-3);
+      }
+
+      .match-point-banner {
+        flex: 1;
+        max-width: 620px;
+        margin: 0 auto;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(13px, 3.5vw, 18px);
+        letter-spacing: 1px;
+        padding: 6px 12px;
+        background: #1a1a1a;
+        border: 2px solid #444;
+        color: #ccc;
+        transition: all 0.2s;
+      }
+      .match-point-banner.active {
+        background: var(--holo-4);
+        color: white;
+        border-color: white;
+        box-shadow: 3px 3px 0 black;
+        animation: pulseBanner 0.8s infinite alternate;
+      }
+      .match-point-banner.deuce {
+        background: var(--holo-1);
+        color: black;
+        border: 2px solid black;
+        outline: 2px solid white;
+        animation: pulseBanner 0.6s infinite alternate;
+      }
+      .match-point-banner.sudden-death {
+        background: var(--holo-2);
+        color: white;
+        border: 2px solid white;
+        animation: pulseBanner 0.55s infinite alternate;
+      }
+      @keyframes pulseBanner {
+        from {
+          transform: scale(0.98);
+        }
+        to {
+          transform: scale(1.02);
+        }
+      }
+
+      .arena-split {
+        width: 100%;
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lane {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        cursor: pointer;
+        padding: clamp(12px, 2.5vh, 24px) clamp(8px, 2.5vw, 24px);
+        transition: background 0.1s;
+        overflow: hidden;
+      }
+      .lane.left {
+        background: linear-gradient(180deg, rgba(0, 255, 255, 0.14), rgba(0, 0, 0, 0.5));
+        border-right: 2px solid var(--border);
+      }
+      .lane.right {
+        background: linear-gradient(180deg, rgba(255, 0, 255, 0.14), rgba(0, 0, 0, 0.5));
+        border-left: 2px solid var(--border);
+      }
+      .lane:active {
+        background: rgba(204, 255, 0, 0.25);
+      }
+      .lane.flash-win {
+        background: var(--holo-1) !important;
+        color: black !important;
+      }
+      .lane.flash-fail {
+        background: var(--holo-4) !important;
+      }
+
+      .player-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2px;
+        pointer-events: none;
+      }
+      .player-tag {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(20px, 4.5vw, 32px);
+        letter-spacing: 1px;
+        color: white;
+        -webkit-text-stroke: 1.5px black;
+        text-shadow: 3px 3px 0 #000;
+      }
+      .score-big {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(44px, 9vw, 72px);
+        line-height: 0.95;
+        color: var(--holo-1);
+        -webkit-text-stroke: 2px black;
+        text-shadow: 4px 4px 0 #000;
+      }
+      .tap-hint {
+        font-size: clamp(10px, 2.4vw, 12px);
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.78);
+        padding: 6px 12px;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        text-align: center;
+        pointer-events: none;
+        box-shadow: 3px 3px 0 #000;
+      }
+      .streak-pill {
+        font-size: 11px;
+        font-weight: 700;
+        background: var(--holo-2);
+        color: white;
+        padding: 2px 8px;
+        border: 2px solid black;
+        display: none;
+      }
+      .streak-pill.show {
+        display: inline-block;
+      }
+
+      .card-slot-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: auto 0;
+        pointer-events: none;
+      }
+      .slot-label {
+        font-size: clamp(11px, 2.5vw, 13px);
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #aaa;
+        margin-bottom: 8px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2px 8px;
+        border: 1px solid #444;
+      }
+      .slot-label.next {
+        color: #000;
+        background: var(--holo-1);
+        border-color: #000;
+      }
+
+      .card {
+        width: clamp(142px, 43vw, 260px);
+        height: clamp(200px, 42vh, 360px);
+        background: #1c1c1c;
+        border: 4px solid white;
+        box-shadow: 8px 8px 0 #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: clamp(10px, 2vw, 16px);
+        position: relative;
+        will-change: transform;
+        cursor: pointer;
+      }
+      .card.empty {
+        border-style: dashed;
+        border-color: #444;
+        background: #141414;
+        justify-content: center;
+      }
+      .card.pop {
+        animation: cardPop 0.15s cubic-bezier(0.2, 0.9, 0.3, 1.35) forwards;
+      }
+      @keyframes cardPop {
+        0% {
+          transform: scale(0.78) rotate(-4deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .card-corner {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(20px, 4.5vw, 28px);
+        line-height: 1;
+      }
+      .card-num {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(96px, 24vw, 164px);
+        line-height: 0.88;
+        -webkit-text-stroke: 3px black;
+        text-shadow: 5px 5px 0 #000;
+      }
+      .card-badge {
+        width: 100%;
+        background: black;
+        color: white;
+        font-size: clamp(11px, 2.6vw, 14px);
+        font-weight: 700;
+        text-align: center;
+        padding: 5px 6px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Carta Comodín: Los 4 colores del juego divididos en 4 franjas nítidas en toda la carta */
+      .card.rainbow {
+        background: linear-gradient(
+          135deg,
+          #ccff00 0% 24%,
+          #000000 24% 26%,
+          #ff00ff 26% 49%,
+          #000000 49% 51%,
+          #00ffff 51% 74%,
+          #000000 74% 76%,
+          #ff2200 76% 100%
+        ) !important;
+        border: 4px solid #ffffff;
+        outline: 3px solid #000000;
+      }
+      .card.rainbow .card-num {
+        color: #ffffff;
+        -webkit-text-stroke: 4px #000000;
+        text-shadow: 6px 6px 0 #000000;
+      }
+      .card-special-stamp {
+        background: #000000;
+        color: var(--holo-1);
+        border: 2px solid #ffffff;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(12px, 3vw, 16px);
+        letter-spacing: 1px;
+        padding: 2px 10px;
+        box-shadow: 3px 3px 0 #000;
+        text-transform: uppercase;
+      }
+
+      /* Floating feedback toast */
+      .pop-toast {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        background: black;
+        border: 3px solid white;
+        padding: 10px 18px;
+        z-index: 25;
+        text-align: center;
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity 0.15s,
+          transform 0.15s;
+        box-shadow: 6px 6px 0 var(--holo-2);
+        min-width: 240px;
+      }
+      .pop-toast.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .pop-toast-title {
+        font-family: "Anton", sans-serif;
+        font-size: 26px;
+        color: var(--holo-1);
+        letter-spacing: 1px;
+      }
+      .pop-toast-sub {
+        font-size: 11px;
+        font-weight: 700;
+        color: white;
+        margin-top: 2px;
+      }
+
+      /* Countdown overlay */
+      .countdown-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 40;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .countdown-overlay.active {
+        display: flex;
+      }
+      .countdown-num {
+        font-family: "Anton", sans-serif;
+        font-size: 130px;
+        color: var(--holo-1);
+        -webkit-text-stroke: 4px black;
+        text-shadow: 6px 6px 0 var(--holo-2);
+      }
+
+      /* ---- MODALS ---- */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 50;
+      }
+      .modal.active {
+        display: flex;
+        animation: fadeIn 0.25s ease-out;
+      }
+      .modal-card {
+        width: 100%;
+        max-width: 400px;
+        background: #151515;
+        border: 3px solid white;
+        padding: 24px 20px;
+        text-align: center;
+        box-shadow: 8px 8px 0 var(--holo-3);
+      }
+      .winner-emoji {
+        font-size: 56px;
+        line-height: 1;
+      }
+      .winner-title {
+        font-family: "Anton", sans-serif;
+        font-size: 22px;
+        color: var(--holo-3);
+        letter-spacing: 1.5px;
+        margin-top: 6px;
+      }
+      .winner-name {
+        font-family: "Anton", sans-serif;
+        font-size: 44px;
+        color: var(--holo-1);
+        -webkit-text-stroke: 2px black;
+        text-shadow: 4px 4px 0 var(--holo-2);
+        line-height: 1.05;
+        margin: 6px 0 12px;
+      }
+
+      .ranking-box {
+        width: 100%;
+        background: black;
+        border: 2px solid #444;
+        padding: 10px;
+        margin-bottom: 16px;
+        max-height: 160px;
+        overflow-y: auto;
+        text-align: left;
+      }
+      .ranking-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 5px 4px;
+        border-bottom: 1px solid #222;
+      }
+      .ranking-row:last-child {
+        border-bottom: none;
+      }
+
+      /* AI Difficulty Selector */
+      .diff-btn {
+        width: 100%;
+        text-align: left;
+        background: black;
+        border: 2px solid #555;
+        color: white;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: transform 0.1s;
+      }
+      .diff-btn.selected {
+        border-color: var(--holo-1);
+        box-shadow: 4px 4px 0 var(--holo-1);
+      }
+      .diff-btn-title {
+        font-family: "Anton", sans-serif;
+        font-size: 20px;
+        color: var(--holo-3);
+      }
+      .diff-btn.selected .diff-btn-title {
+        color: var(--holo-1);
+      }
+      .diff-btn-desc {
+        font-size: 11px;
+        color: #bbb;
+        margin-top: 2px;
+      }
+
+      /* Rules Card */
+      .rules-card {
+        width: 100%;
+        max-width: 430px;
+        background: #141414;
+        border: 3px solid white;
+        padding: 20px;
+        box-shadow: 8px 8px 0 var(--holo-1);
         max-height: 88vh;
         overflow-y: auto;
         text-align: left;
       }
-      .telemetry-title {
-        font-family: "Anton", sans-serif;
-        font-size: 26px;
-        color: var(--holo-1);
-        text-align: center;
-        letter-spacing: 1px;
-        margin-bottom: 4px;
-        -webkit-text-stroke: 1px black;
-        text-shadow: 2px 2px 0 var(--holo-2);
-      }
-      .telemetry-sub {
-        font-size: 11px;
-        color: var(--holo-3);
-        text-align: center;
-        margin-bottom: 14px;
-        letter-spacing: 1px;
-      }
-      .telemetry-grade-wrap {
+      .rule-item {
         background: black;
-        border: 2px solid white;
-        padding: 12px;
-        margin-bottom: 16px;
-        text-align: center;
-        box-shadow: 4px 4px 0 var(--holo-2);
-      }
-      .telemetry-grade {
-        font-family: "Anton", sans-serif;
-        font-size: 26px;
-        color: #ffd700;
-        letter-spacing: 1px;
-        text-shadow: 2px 2px 0 black;
-      }
-      .telemetry-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 14px;
-      }
-      .telemetry-box {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 10px 8px;
-        text-align: center;
-      }
-      .telemetry-box-val {
-        font-family: "Space Mono", monospace;
-        font-weight: 700;
-        font-size: 20px;
-        color: white;
-      }
-      .telemetry-box-lbl {
-        font-size: 10px;
-        color: #aaa;
-        text-transform: uppercase;
-        margin-top: 4px;
-        letter-spacing: 0.5px;
-      }
-      .ai-diff-btn {
-        width: 100%;
-        padding: 12px;
+        border: 2px solid #333;
+        padding: 10px 12px;
         margin-bottom: 10px;
-        background: black;
-        border: 2px solid white;
-        color: white;
-        font-family: "Space Mono", monospace;
-        font-weight: 700;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .rule-item b {
+        color: var(--holo-1);
         font-size: 12px;
-        cursor: pointer;
-        text-align: left;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: transform 0.1s, border-color 0.1s, box-shadow 0.1s;
-      }
-      .ai-diff-btn:hover, .ai-diff-btn.selected {
-        border-color: var(--holo-1);
-        box-shadow: 4px 4px 0 var(--holo-1);
-        transform: translate(-2px, -2px);
-      }
-      .ai-diff-btn.selected {
-        background: rgba(204, 255, 0, 0.14);
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   </head>
   <body>
-    <!-- HOME -->
+    <!-- ==================== PANTALLA INICIO ==================== -->
     <div class="screen active" id="home">
       <div class="logo-wrap">
-        <div class="logo">six<br />seven<span class="sparkle">✦</span></div>
-        <div class="tagline">duelo de reflejos</div>
+        <div class="logo">SIX SEVEN<span class="sparkle">✨</span></div>
+        <div class="tagline">Reflejos · Caos · Velocidad</div>
       </div>
+
       <div class="mode-stack">
         <div class="glass-card" onclick="goDuel()">
           <div class="mode-emoji">⚡</div>
           <div class="mode-info">
             <div class="mode-title">Duelo 1v1</div>
-            <div class="mode-desc">1 vs 1 local. ¡Con Muerte Súbita a 2 de ventaja!</div>
+            <div class="mode-desc">Cara a cara rápido en el mismo móvil</div>
           </div>
-          <div class="mode-arrow">›</div>
         </div>
-        <div class="glass-card" onclick="openAISetupModal()" style="border-color: var(--holo-3); background: rgba(0, 255, 255, 0.06);">
+
+        <div class="glass-card" onclick="openAISetupModal()">
           <div class="mode-emoji">🤖</div>
           <div class="mode-info">
-            <div class="mode-title" style="color: var(--holo-3);">Reto IA (TFM Edition)</div>
-            <div class="mode-desc">Enfréntate al bot con latencia y reflejos cognitivos.</div>
+            <div class="mode-title" style="color: var(--holo-3)">Reto IA</div>
+            <div class="mode-desc">Juega en solitario contra el bot</div>
           </div>
-          <div class="mode-arrow">›</div>
         </div>
+
         <div class="glass-card" onclick="goKingSetup()">
           <div class="mode-emoji">👑</div>
           <div class="mode-info">
-            <div class="mode-title">Rey de la pista</div>
-            <div class="mode-desc">
-              Hasta 10 jugadores. El que gana se queda.
+            <div class="mode-title">Rey de la Pista</div>
+            <div class="mode-desc">3 a 8 jugadores · El ganador se queda</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-actions-row">
+        <button class="btn-rules-home" onclick="openRules()">📖 ¿Cómo se juega?</button>
+        <button
+          class="btn-wildcard-toggle"
+          id="wildcardToggleBtn"
+          onclick="toggleWildcardOption()"
+          title="Activar o desactivar la carta Comodín de 4 colores"
+        >
+          <span class="wc-label" id="wildcardToggleText">🌈 COMODÍN: OFF</span>
+        </button>
+      </div>
+
+      <div class="legend">
+        <b>6</b> IZQ + <b>7</b> DER DEL MISMO COLOR = ¡PUNTO!
+      </div>
+    </div>
+
+    <!-- ==================== CONFIGURACIÓN REY DE LA PISTA ==================== -->
+    <div class="screen" id="kingSetup">
+      <div class="setup-box">
+        <div class="setup-title">👑 Rey de la Pista</div>
+        <div class="setup-sub">Añade de 3 a 8 jugadores. ¡El que gana sigue en pista!</div>
+
+        <div class="input-row">
+          <input
+            type="text"
+            id="playerInput"
+            maxlength="12"
+            placeholder="Nombre del jugador..."
+            onkeydown="if(event.key==='Enter') addPlayer()"
+          />
+          <button class="btn-add" onclick="addPlayer()">+</button>
+        </div>
+
+        <div class="chips-wrap" id="playerChips"></div>
+
+        <div class="setup-actions">
+          <button class="btn-secondary" onclick="goHome()" style="flex: 1">← Volver</button>
+          <button class="btn-primary" onclick="startKingGame()" style="flex: 2">
+            ¡Jugar! 🔥
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PANTALLA DE JUEGO (IZQUIERDA VS DERECHA, CARTAS PULSABLES) ==================== -->
+    <div class="screen" id="game">
+      <!-- Barra Superior HUD -->
+      <div class="hud-bar">
+        <button class="icon-btn" onclick="goHome()" title="Salir al menú">🏠</button>
+        <div class="match-point-banner" id="matchPointBanner">
+          META: 5 PUNTOS (GANA DE 2 EN EMPATE)
+        </div>
+        <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Sonido">🔊</button>
+      </div>
+
+      <!-- Tablero Dividido: Izquierda (Jugador 1 + Carta Izq) y Derecha (Jugador 2 + Carta Der) -->
+      <div class="arena-split">
+        <!-- LADO IZQUIERDO (Jugador 1 / Rey) -->
+        <div class="lane left" id="laneLeft">
+          <div class="player-header">
+            <div class="streak-pill" id="streakLeft">🔥 RACHA x2</div>
+            <div class="player-tag" id="bottomPlayerLabel">JUGADOR 1</div>
+            <div class="score-big" id="scoreLeft">0</div>
+          </div>
+
+          <div class="card-slot-wrap">
+            <div class="card empty" id="cardLeft">
+              <div class="card-num" style="color: #2a2a2a; -webkit-text-stroke: 0">•</div>
             </div>
           </div>
-          <div class="mode-arrow">›</div>
-        </div>
-        <div class="glass-card" onclick="openTelemetryModal()" style="border-color: var(--holo-2); background: rgba(255, 0, 255, 0.06);">
-          <div class="mode-emoji">📊</div>
-          <div class="mode-info">
-            <div class="mode-title" style="color: var(--holo-2);">Telemetría TFM</div>
-            <div class="mode-desc">Analítica neuro-cognitiva de reflejos y calificación.</div>
-          </div>
-          <div class="mode-arrow">›</div>
-        </div>
-        <div class="glass-card" onclick="openRulesModal()" style="border-color: var(--holo-1); background: rgba(0, 255, 255, 0.08);">
-          <div class="mode-emoji">📖</div>
-          <div class="mode-info">
-            <div class="mode-title" style="color: var(--holo-1);">Reglas & Muerte Súbita</div>
-            <div class="mode-desc">Ventaja de 2 puntos, Wilds, Jackpots y Bombas.</div>
-          </div>
-          <div class="mode-arrow">›</div>
-        </div>
-      </div>
-      <div class="legend" style="margin-top: 24px; text-align: center">
-        encuentra <b>6</b> y <b>7</b> del mismo color<br />
-        <span style="color: var(--holo-4)"
-          >¡SI TOCAS MAL, PIERDES UN PUNTO!</span
-        >
-      </div>
-    </div>
 
-    <!-- SETUP REY -->
-    <div class="screen" id="kingSetup">
-      <div class="setup-title">¿Quién juega?</div>
-      <div class="setup-sub">añade entre 3 y 10 jugadores</div>
-      <div class="input-row">
-        <input
-          type="text"
-          class="player-input"
-          id="playerInput"
-          placeholder="Nombre"
-          maxlength="14"
-          autocomplete="off"
-        />
-        <button class="btn-add" onclick="addPlayer()">+</button>
-      </div>
-      <div class="player-list" id="playerList"></div>
-      <button
-        class="btn-primary"
-        id="startKingBtn"
-        onclick="startKing()"
-        disabled
-      >
-        Empezar
-      </button>
-      <button class="btn-back" onclick="goHome()">← volver</button>
-    </div>
+          <div class="tap-hint" id="leftTapHint">👆 ¡TOCA TU CARTA!</div>
+        </div>
 
-    <!-- PRE-MATCH -->
-    <div class="screen" id="prematch">
-      <div class="matchup">
-        <div class="matchup-label" id="lblKing">👑 Reinando</div>
-        <div class="crown" id="iconCrown">👑</div>
-        <div class="king-name" id="kingNameDisplay">—</div>
-        <div class="streak-pill" id="streakDisplay">sin racha</div>
-        <div class="vs">vs</div>
-        <div class="matchup-label" id="lblChallenger">retador</div>
-        <div class="challenger-name" id="challengerNameDisplay">—</div>
-      </div>
-      <div class="queue">
-        <div class="queue-label">Cola</div>
-        <div class="queue-list" id="queueList">—</div>
-      </div>
-      <button class="btn-primary" onclick="beginRound()">¡Listos!</button>
-    </div>
-
-    <!-- JUEGO -->
-    <div class="game" id="game">
-      <div class="game-header">
-        <div class="player-tag left">
-          <div class="name" id="nameLeft">Jugador 1</div>
-          <div class="streak-fire" id="streakLeft" style="display: none">
-            🔥 racha: 1
-          </div>
-          <div class="combo-badge" id="comboLeft" style="display: none">
-            COMBO x2 🔥
-          </div>
-          <div class="score" id="scoreLeft">0</div>
-        </div>
-        <div class="game-title-center">
-          <div class="title">six seven</div>
-          <button class="btn-exit" onclick="exitToMenu()">Salir ↩</button>
-        </div>
-        <div class="player-tag right">
-          <div class="name" id="nameRight">Jugador 2</div>
-          <div class="streak-fire" id="streakRight" style="display: none">
-            🔥 racha: 1
-          </div>
-          <div class="combo-badge" id="comboRight" style="display: none">
-            COMBO x2 🔥
-          </div>
-          <div class="score" id="scoreRight">0</div>
-        </div>
-      </div>
-      <div class="speed-meter-wrap">
-        <div class="speed-bar-fill" id="speedBar"></div>
-        <div class="speed-meter-label" id="speedLabel">⚡ VELOCIDAD: 1.0X ⚡</div>
-      </div>
-      <div class="match-point-banner" id="matchPointBanner">🔥 PUNTO DE PARTIDO 🔥</div>
-      <div class="arena">
-        <div class="lane left" id="laneLeft">
-          <div class="card" id="cardLeft">
-            <span class="num-corner tl">·</span>
-            <span class="num-big">·</span>
-            <span class="num-corner br">·</span>
-          </div>
-          <div class="meme-anim" id="memeLeft"></div>
-          <div class="tap-hint"><span class="key-badge">A</span> TOCA O PULSA</div>
-        </div>
+        <!-- LADO DERECHO (Jugador 2 / Retador / Bot) -->
         <div class="lane right" id="laneRight">
-          <div class="card" id="cardRight">
-            <span class="num-corner tl">·</span>
-            <span class="num-big">·</span>
-            <span class="num-corner br">·</span>
+          <div class="player-header">
+            <div class="streak-pill" id="streakRight">🔥 RACHA x2</div>
+            <div class="player-tag" id="topPlayerLabel">JUGADOR 2</div>
+            <div class="score-big" id="scoreRight">0</div>
           </div>
-          <div class="meme-anim" id="memeRight"></div>
-          <div class="tap-hint"><span class="key-badge">L</span> TOCA O PULSA</div>
+
+          <div class="card-slot-wrap">
+            <div class="card empty" id="cardRight">
+              <div class="card-num" style="color: #2a2a2a; -webkit-text-stroke: 0">•</div>
+            </div>
+          </div>
+
+          <div class="tap-hint" id="topTapHint">👆 ¡TOCA TU CARTA!</div>
+        </div>
+
+        <!-- Toast central de jugada -->
+        <div class="pop-toast" id="popToast">
+          <div class="pop-toast-title" id="popToastTitle">¡SIX SEVEN!</div>
+          <div class="pop-toast-sub" id="popToastSub">+1 PUNTO</div>
         </div>
       </div>
     </div>
 
-    <!-- COUNTDOWN -->
-    <div class="countdown" id="countdown"></div>
+    <!-- ==================== CUENTA ATRÁS ==================== -->
+    <div class="countdown-overlay" id="countdownOverlay">
+      <div style="font-size: 14px; font-weight: 700; color: var(--holo-3); letter-spacing: 3px">
+        PREPARADOS...
+      </div>
+      <div class="countdown-num" id="countdownNum">3</div>
+    </div>
 
-    <!-- MODAL FIN DE RONDA (Rey) -->
+    <!-- ==================== MODAL FIN DE RONDA (REY DE LA PISTA) ==================== -->
     <div class="modal" id="roundEnd">
-      <div class="winner-emoji" id="roundEmoji">🎉</div>
-      <div class="winner-title" id="roundTitle">¡Gana!</div>
-      <div class="winner-name" id="roundWinnerName">—</div>
-      <div class="winner-detail" id="roundDetail">—</div>
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="nextRound()">Siguiente</button>
-        <button class="btn-primary" onclick="openTelemetryModal()" style="background: var(--holo-2); color: white; border-color: white; font-size: 18px; padding: 12px 18px;">📊 Telemetría TFM</button>
-        <button class="btn-back" onclick="endTournament()">
-          Terminar torneo
+      <div class="modal-card">
+        <div class="winner-emoji" id="roundEmoji">👑</div>
+        <div class="winner-title" id="roundTitle">¡Sigue en la pista!</div>
+        <div class="winner-name" id="roundWinner">Jugador</div>
+        <div
+          id="roundScoreSub"
+          style="font-size: 12px; color: #ccc; margin-bottom: 12px; font-weight: 700"
+        ></div>
+
+        <div class="ranking-box" id="rankingList"></div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap">
+          <button class="btn-primary" onclick="nextKingRound()" style="flex: 2">
+            Siguiente Duelo ⚡
+          </button>
+          <button class="btn-secondary" onclick="goHome()" style="flex: 1">Menú</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL FIN DE DUELO (1v1 / IA) ==================== -->
+    <div class="modal" id="duelEnd">
+      <div class="modal-card">
+        <div class="winner-emoji" id="duelEmoji">🏆</div>
+        <div class="winner-title" id="duelTitle">¡Ganador del Duelo!</div>
+        <div class="winner-name" id="duelWinner">Jugador 1</div>
+        <div
+          id="duelScoreSub"
+          style="font-size: 13px; color: var(--holo-3); margin-bottom: 18px; font-weight: 700"
+        ></div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap">
+          <button class="btn-primary" onclick="rematchDuel()" style="flex: 2">
+            Revancha 🔄
+          </button>
+          <button class="btn-secondary" onclick="goHome()" style="flex: 1">Menú</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL CONFIGURACIÓN RETO IA ==================== -->
+    <div class="modal" id="aiSetupModal">
+      <div class="modal-card" style="border-color: var(--holo-3)">
+        <div class="setup-title" style="color: var(--holo-3); font-size: 30px">🤖 Reto IA</div>
+        <div class="setup-sub">Elige la velocidad de reflejos del bot:</div>
+
+        <button class="diff-btn" id="diffEasy" onclick="selectAIDifficulty('easy')">
+          <div class="diff-btn-title">🌱 Nivel Novato</div>
+          <div class="diff-btn-desc">Reflejos suaves (~700ms). Ideal para practicar.</div>
+        </button>
+
+        <button class="diff-btn selected" id="diffPro" onclick="selectAIDifficulty('pro')">
+          <div class="diff-btn-title">⚡ Nivel Competitivo</div>
+          <div class="diff-btn-desc">Rápido y atento (~480ms). Un reto equilibrado.</div>
+        </button>
+
+        <button class="diff-btn" id="diffMaster" onclick="selectAIDifficulty('master')">
+          <div class="diff-btn-title">🔥 Nivel Maestro</div>
+          <div class="diff-btn-desc">Velocidad extrema (~340ms). ¡No perdona una!</div>
+        </button>
+
+        <div style="display: flex; gap: 10px; margin-top: 14px">
+          <button class="btn-secondary" onclick="closeAISetupModal()" style="flex: 1">
+            Cancelar
+          </button>
+          <button class="btn-primary" onclick="startAIGame()" style="flex: 2">
+            ¡Jugar! ⚡
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL DE REGLAS ==================== -->
+    <div class="modal" id="rulesModal">
+      <div class="rules-card">
+        <div
+          style="
+            font-family: 'Anton', sans-serif;
+            font-size: 28px;
+            color: var(--holo-1);
+            margin-bottom: 12px;
+            text-align: center;
+          "
+        >
+          📖 CÓMO SE JUEGA A SIX SEVEN
+        </div>
+
+        <div class="rule-item" style="border-color: var(--holo-1)">
+          <b>✅ JUGADA BUENA (+1 PUNTO):</b><br />
+          Toca tu carta lo más rápido posible SOLO cuando salga un <b>6 a la IZQUIERDA</b> y un
+          <b>7 a la DERECHA</b> del <b>MISMO COLOR</b>.
+        </div>
+
+        <div class="rule-item" style="border-color: var(--holo-4)">
+          <b>🚫 JUGADAS MALAS (+1 PUNTO PARA EL RIVAL):</b><br />
+          • <b>7 a la izquierda y 6 a la derecha (7-6):</b> ¡NUNCA vale! Es una trampa.<br />
+          • <b>6-7 de distinto color</b> (salvo que actives el Comodín 🌈) o números iguales (<b>6-6</b> / <b>7-7</b>).<br />
+          • Tocar cuando solo se ha repartido 1 carta y falta la otra.
+        </div>
+
+        <div class="rule-item" style="border-color: var(--holo-2)">
+          <b>⚡ PARTIDAS A 5 PUNTOS Y MUERTE SÚBITA:</b><br />
+          Gana el primero en llegar a <b>5 puntos</b> con al menos 2 de ventaja (5-0, 5-1, 5-2, 5-3). Si empatáis a <b>4-4</b>, entra la <b>Muerte Súbita</b> y hay que ganar por <b>2 puntos de diferencia</b> (6-4, 7-5, 8-6...).
+        </div>
+
+        <button class="btn-primary" onclick="closeRules()" style="width: 100%; margin-top: 6px">
+          ¡Entendido!
         </button>
       </div>
     </div>
 
-    <!-- MODAL FIN DUELO -->
-    <div class="modal" id="duelEnd">
-      <div class="winner-emoji">🏆</div>
-      <div class="winner-title">¡Victoria!</div>
-      <div class="winner-name" id="duelWinnerName">—</div>
-      <div class="winner-detail" id="duelWinnerDetail" style="margin-top: 8px; color: var(--holo-1); font-size: 13px; font-weight: bold;">—</div>
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="restartDuel()">Otra ronda</button>
-        <button class="btn-primary" onclick="openTelemetryModal()" style="background: var(--holo-2); color: white; border-color: white; font-size: 18px; padding: 12px 18px;">📊 Telemetría TFM</button>
-        <button class="btn-back" onclick="goHome()">← Menú</button>
-      </div>
-    </div>
-
-    <!-- LEADERBOARD FINAL -->
-    <div class="modal" id="tournamentEnd">
-      <div class="winner-emoji">👑</div>
-      <div class="winner-title">Rey</div>
-      <div class="winner-name" id="finalKingName">—</div>
-      <div class="winner-detail" id="finalKingDetail">racha máxima de —</div>
-      <div class="leaderboard">
-        <div class="lb-title">Ranking</div>
-        <div id="lbRows"></div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="openTelemetryModal()" style="background: var(--holo-2); color: white; border-color: white; font-size: 18px; padding: 12px 18px;">📊 Telemetría TFM</button>
-        <button class="btn-primary" onclick="goHome()">Nueva partida</button>
-      </div>
-    </div>
-
-    <!-- MODAL CONFIGURACIÓN RETO IA (TFM EDITION) -->
-    <div class="modal" id="aiSetupModal">
-      <div class="telemetry-card" style="border-color: var(--holo-3); max-width: 400px;">
-        <div class="telemetry-title" style="color: var(--holo-3);">🤖 Reto IA (TFM Edition)</div>
-        <div class="telemetry-sub">Elige el perfil cognitivo del rival sintetizado:</div>
-        
-        <div class="ai-diff-btn" id="diffBtnNovice" onclick="selectAIDifficulty('novice')">
-          <div>
-            <div style="color: var(--holo-1); font-size: 14px;">1. Novato (Heurístico)</div>
-            <div style="color: #bbb; font-size: 10px; margin-top: 2px;">Latencia humana ~700ms · 28% error en trampas</div>
-          </div>
-          <span id="diffCheckNovice" style="font-size: 18px;">⚪</span>
-        </div>
-
-        <div class="ai-diff-btn selected" id="diffBtnPro" onclick="selectAIDifficulty('pro')">
-          <div>
-            <div style="color: var(--holo-3); font-size: 14px;">2. Competitivo (Pro)</div>
-            <div style="color: #bbb; font-size: 10px; margin-top: 2px;">Latencia ~450ms · 8% error · Reflejos esports</div>
-          </div>
-          <span id="diffCheckPro" style="font-size: 18px;">🟢</span>
-        </div>
-
-        <div class="ai-diff-btn" id="diffBtnMaster" onclick="selectAIDifficulty('master')">
-          <div>
-            <div style="color: #ffd700; font-size: 14px;">3. Neuronal (Matrícula de Honor)</div>
-            <div style="color: #bbb; font-size: 10px; margin-top: 2px;">DDA Adaptativo ~260ms · Discriminación visual extrema</div>
-          </div>
-          <span id="diffCheckMaster" style="font-size: 18px;">⚪</span>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 18px;">
-          <button class="btn-primary" onclick="startAIMatch()" style="width: 100%;">¡Comenzar Desafío!</button>
-          <button class="btn-back" onclick="closeAISetupModal()" style="margin: 0; width: 100%;">Volver</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODAL DASHBOARD TELEMETRÍA TFM & RENDIMIENTO COGNITIVO -->
-    <div class="modal" id="telemetryModal">
-      <div class="telemetry-card">
-        <div class="telemetry-title">📊 Telemetría TFM</div>
-        <div class="telemetry-sub">Evaluación psicométrica y latencia motora en tiempo real</div>
-
-        <div class="telemetry-grade-wrap">
-          <div style="font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase;">Calificación Académica TFM</div>
-          <div class="telemetry-grade" id="telemetryGradeBadge">Matrícula de Honor 🏆</div>
-          <div style="font-size: 11px; color: var(--holo-3); margin-top: 4px;" id="telemetryGradeDesc">Reflejos y discriminación de nivel profesional.</div>
-        </div>
-
-        <div class="telemetry-grid">
-          <div class="telemetry-box">
-            <div class="telemetry-box-val" id="telAvgReaction">— ms</div>
-            <div class="telemetry-box-lbl">Tiempo de Reacción Medio</div>
-          </div>
-          <div class="telemetry-box">
-            <div class="telemetry-box-val" id="telFastestReaction" style="color: var(--holo-1);">— ms</div>
-            <div class="telemetry-box-lbl">Mejor Reflejo</div>
-          </div>
-          <div class="telemetry-box">
-            <div class="telemetry-box-val" id="telAccuracy" style="color: #00ffff;">— %</div>
-            <div class="telemetry-box-lbl">Tasa de Precisión</div>
-          </div>
-          <div class="telemetry-box">
-            <div class="telemetry-box-val" id="telTrapsAvoided" style="color: var(--holo-4);">— %</div>
-            <div class="telemetry-box-lbl">Trampas Evitadas (7-6 / 💣)</div>
-          </div>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 10px; font-size: 11px; line-height: 1.4; color: #ccc; margin-bottom: 16px;">
-          <b style="color:white">Análisis Cognitivo:</b>
-          <span id="telCognitiveNote">Se requieren al menos 3 jugadas para computar la curva gaussiana de respuesta sensorial.</span>
-        </div>
-
-        <div style="display: flex; gap: 8px;">
-          <button class="btn-primary" onclick="closeTelemetryModal()" style="flex: 1;">Cerrar</button>
-          <button class="btn-back" onclick="resetTelemetryData()" style="margin: 0; padding: 0 16px;">Limpiar</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODAL REGLAS Y CARTAS ESPECIALES -->
-    <div class="modal" id="rulesModal">
-      <div class="rules-card">
-        <div class="rules-title">✦ Reglas & Muerte Súbita ✦</div>
-        
-        <div class="rule-item" style="background: rgba(255, 215, 0, 0.12); border: 1px solid #ffd700; padding: 8px;">
-          <div class="rule-badge">⚡</div>
-          <div>
-            <b style="color:#ffd700">MUERTE SÚBITA (VENTAJA DE 2 PUNTOS):</b><br/>
-            Si el set llega a <b>2-2</b>, ¡se activa la Muerte Súbita! El primero a 3 ya no gana automáticamente: <b>hay que ganar por DOS puntos de diferencia</b> (ej. 4-2, 5-3, 6-4).
-          </div>
-        </div>
-
-        <div class="rule-item">
-          <div class="rule-badge">🎯</div>
-          <div>
-            <b style="color:var(--holo-1)">REGLA DE ORO DE SIX-SEVEN:</b><br/>
-            ¡Solo vale <b>6 a la izquierda y 7 a la derecha del mismo color</b>! Si sale 7 a la izquierda y 6 a la derecha es una trampa ("7-6") y <b>pierdes 1 punto</b>.
-          </div>
-        </div>
-
-        <div class="rule-item">
-          <div class="rule-badge">👑</div>
-          <div>
-            <b style="color:#ffd700">REY DORADO (JACKPOT 👑67):</b><br/>
-            Carta brillante dorada que otorga <b>+2 PUNTOS</b> instantáneos al primero que pulse.
-          </div>
-        </div>
-
-        <div class="rule-item">
-          <div class="rule-badge">🌈</div>
-          <div>
-            <b style="color:#ff00ff">WILD ARCOÍRIS (🌈 6 / 🌈 7):</b><br/>
-            Comodín multicolor. Hace Six-Seven con el número correspondiente de <b>CUALQUIER color</b>.
-          </div>
-        </div>
-
-        <div class="rule-item">
-          <div class="rule-badge">💣</div>
-          <div>
-            <b style="color:var(--holo-4)">BOMBA TIKTOK (💣):</b><br/>
-            ¡Peligro! Si tocas cuando hay bomba, ¡explota, pierdes 1 punto y se resetea tu racha de combo!
-          </div>
-        </div>
-
-        <div class="rule-item">
-          <div class="rule-badge">⚡</div>
-          <div>
-            <b style="color:#00ffff">TRAMPA 76 GLITCH:</b><br/>
-            Carta engañosa invertida. Si pulsas por reflejo, penalización de <b>-1 punto</b>.
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 16px;">
-          <button class="btn-primary" onclick="closeRulesModal()" style="width: 100%;">¡Entendido, a Jugar!</button>
-        </div>
-      </div>
-    </div>
-
     <script>
-      // ====== MOTOR DE AUDIO ARCADE (WEB AUDIO API SINTETIZADA) ======
-      let audioCtx = null;
-      function getAudioCtx() {
-        if (!audioCtx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          if (AudioContextClass) {
-            audioCtx = new AudioContextClass();
-          }
-        }
-        if (audioCtx && audioCtx.state === "suspended") {
-          audioCtx.resume();
-        }
-        return audioCtx;
-      }
-
-      function playTone(freq, type = "sine", duration = 0.1, vol = 0.1, rampTo = null) {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = type;
-          osc.frequency.setValueAtTime(freq, ctx.currentTime);
-          if (rampTo !== null) {
-            osc.frequency.exponentialRampToValueAtTime(Math.max(10, rampTo), ctx.currentTime + duration);
-          }
-          gain.gain.setValueAtTime(vol, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + duration);
-        } catch (e) {}
-      }
-
-      // Sonido de golpeo victorioso con sub-bajo y acorde brillante
-      function playHitSound(combo = 1) {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-          
-          // Sub-bass thump
-          const subOsc = ctx.createOscillator();
-          const subGain = ctx.createGain();
-          subOsc.type = "sine";
-          subOsc.frequency.setValueAtTime(140 + combo * 15, now);
-          subOsc.frequency.exponentialRampToValueAtTime(45, now + 0.18);
-          subGain.gain.setValueAtTime(0.35, now);
-          subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-          subOsc.connect(subGain);
-          subGain.connect(ctx.destination);
-          subOsc.start(now);
-          subOsc.stop(now + 0.2);
-
-          // Arpegio brillante en pentatónica
-          const baseFreq = 523.25; // C5
-          const notes = [baseFreq, baseFreq * 1.25, baseFreq * 1.5, baseFreq * 2];
-          notes.forEach((freq, idx) => {
-            const chordOsc = ctx.createOscillator();
-            const chordGain = ctx.createGain();
-            chordOsc.type = "triangle";
-            chordOsc.frequency.setValueAtTime(freq * (1 + (combo - 1) * 0.1), now + idx * 0.03);
-            chordGain.gain.setValueAtTime(0.12, now + idx * 0.03);
-            chordGain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.03 + 0.22);
-            chordOsc.connect(chordGain);
-            chordGain.connect(ctx.destination);
-            chordOsc.start(now + idx * 0.03);
-            chordOsc.stop(now + idx * 0.03 + 0.25);
-          });
-        } catch (e) {}
-      }
-
-      // Sonido de error y fallo (downsweep glitch)
-      function playFailSound() {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-          const osc1 = ctx.createOscillator();
-          const osc2 = ctx.createOscillator();
-          const gain = ctx.createGain();
-
-          osc1.type = "sawtooth";
-          osc2.type = "square";
-          osc1.frequency.setValueAtTime(220, now);
-          osc1.frequency.exponentialRampToValueAtTime(60, now + 0.28);
-          osc2.frequency.setValueAtTime(190, now);
-          osc2.frequency.exponentialRampToValueAtTime(50, now + 0.28);
-
-          gain.gain.setValueAtTime(0.18, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-
-          osc1.connect(gain);
-          osc2.connect(gain);
-          gain.connect(ctx.destination);
-
-          osc1.start(now);
-          osc2.start(now);
-          osc1.stop(now + 0.3);
-          osc2.stop(now + 0.3);
-        } catch (e) {}
-      }
-
-      // Sonido de lanzamiento de carta con tono según la velocidad actual
-      function playCardSwoosh(speedFactor = 1) {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const buf = ctx.createBuffer(1, ctx.sampleRate * 0.09, ctx.sampleRate);
-          const data = buf.getChannelData(0);
-          for (let i = 0; i < data.length; i++) {
-            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 2.5) * 0.28;
-          }
-          const src = ctx.createBufferSource();
-          src.buffer = buf;
-          const filter = ctx.createBiquadFilter();
-          filter.type = "bandpass";
-          filter.frequency.value = 1000 + speedFactor * 400;
-          filter.Q.value = 3;
-          src.connect(filter);
-          filter.connect(ctx.destination);
-          src.start();
-
-          // Pop sutil
-          playTone(400 + speedFactor * 150, "sine", 0.04, 0.04);
-        } catch (e) {}
-      }
-
-      // Sonido de punto de partido / alarma de tensión
-      function playMatchPointSound() {
-        playTone(880, "sawtooth", 0.08, 0.12);
-        setTimeout(() => playTone(1174.66, "sawtooth", 0.12, 0.12), 100);
-      }
-
-      // Sonido de jackpot dorado (Ka-ching arcade y acorde brillante)
-      function playJackpotSound() {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-          
-          // Chimes de campana dorada
-          [783.99, 1046.5, 1318.51, 1567.98, 2093].forEach((f, idx) => {
-            const osc = ctx.createOscillator();
-            const g = ctx.createGain();
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(f, now + idx * 0.05);
-            g.gain.setValueAtTime(0.2, now + idx * 0.05);
-            g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.35);
-            osc.connect(g);
-            g.connect(ctx.destination);
-            osc.start(now + idx * 0.05);
-            osc.stop(now + idx * 0.05 + 0.36);
-          });
-        } catch (e) {}
-      }
-
-      // Sonido de explosión de bomba
-      function playBombSound() {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-
-          // Ruido de explosión
-          const buf = ctx.createBuffer(1, ctx.sampleRate * 0.45, ctx.sampleRate);
-          const data = buf.getChannelData(0);
-          for (let i = 0; i < data.length; i++) {
-            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 1.8);
-          }
-          const src = ctx.createBufferSource();
-          src.buffer = buf;
-
-          const filter = ctx.createBiquadFilter();
-          filter.type = "lowpass";
-          filter.frequency.setValueAtTime(800, now);
-          filter.frequency.exponentialRampToValueAtTime(80, now + 0.4);
-
-          const g = ctx.createGain();
-          g.gain.setValueAtTime(0.4, now);
-          g.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-
-          src.connect(filter);
-          filter.connect(g);
-          g.connect(ctx.destination);
-          src.start(now);
-
-          // Sub drop violento
-          const sub = ctx.createOscillator();
-          const subG = ctx.createGain();
-          sub.type = "sine";
-          sub.frequency.setValueAtTime(160, now);
-          sub.frequency.exponentialRampToValueAtTime(25, now + 0.35);
-          subG.gain.setValueAtTime(0.5, now);
-          subG.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-          sub.connect(subG);
-          subG.connect(ctx.destination);
-          sub.start(now);
-          sub.stop(now + 0.4);
-        } catch (e) {}
-      }
-
-      // Sonido de carta Arcoíris Wild
-      function playRainbowSound() {
-        try {
-          const ctx = getAudioCtx();
-          if (!ctx) return;
-          const now = ctx.currentTime;
-          [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5].forEach((f, idx) => {
-            const osc = ctx.createOscillator();
-            const g = ctx.createGain();
-            osc.type = "triangle";
-            osc.frequency.setValueAtTime(f, now + idx * 0.025);
-            g.gain.setValueAtTime(0.12, now + idx * 0.025);
-            g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.025 + 0.2);
-            osc.connect(g);
-            g.connect(ctx.destination);
-            osc.start(now + idx * 0.025);
-            osc.stop(now + idx * 0.025 + 0.22);
-          });
-        } catch (e) {}
-      }
-
-      // Fanfarria de victoria
-      function playVictoryFanfare() {
-        const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5];
-        notes.forEach((freq, idx) => {
-          setTimeout(() => {
-            playTone(freq, "triangle", 0.3, 0.18);
-          }, idx * 110);
-        });
-      }
-
-      function spawnFloatingText(text, color, laneId) {
-        const lane = $(laneId);
-        if (!lane) return;
-        const el = document.createElement("div");
-        el.className = "floating-text";
-        el.textContent = text;
-        el.style.color = color;
-        el.style.left = "50%";
-        el.style.top = "50%";
-        el.style.transform = "translate(-50%, -50%)";
-        lane.appendChild(el);
-        setTimeout(() => el.remove(), 900);
-      }
-
-      function triggerHaptic(type) {
-        if (navigator && navigator.vibrate) {
-          try {
-            if (type === "win") {
-              navigator.vibrate([40, 30, 70]);
-            } else if (type === "fail") {
-              navigator.vibrate([120, 60, 140]);
-            } else if (type === "round-win") {
-              navigator.vibrate([100, 50, 150, 50, 250]);
-            } else if (type === "tap") {
-              navigator.vibrate(18);
-            }
-          } catch (e) {}
-        }
-      }
-
-      function $(id) {
-        return document.getElementById(id);
-      }
-      function escapeHtml(unsafe) {
-        return unsafe
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-
-      // ====== MEMES Y CELEBRACIONES ======
-      const WIN_MEMES = [
-        '<div class="meme-face">🤪<div class="meme-hand l" style="left:-60px">🤚<span style="position:absolute;left:10px;top:-25px;font-size:35px;font-family:serif;color:black">6</span></div><div class="meme-hand r" style="right:-60px">🤚<span style="position:absolute;left:10px;top:-25px;font-size:35px;font-family:serif;color:black">7</span></div></div>',
-        '<div class="meme-face">🤷🏼‍♀️<div class="meme-hand l" style="left:-30px;bottom:10px;font-size:30px">6️⃣</div><div class="meme-hand r" style="right:-30px;bottom:10px;font-size:30px">7️⃣</div></div>',
-        '<div class="meme-face">🤷🏼‍♂️<div class="meme-hand l" style="left:-30px;bottom:10px;font-size:30px">6️⃣</div><div class="meme-hand r" style="right:-30px;bottom:10px;font-size:30px">7️⃣</div></div>',
-        '<div class="meme-face" style="font-size:60px;">👌 👇</div>',
-        '<div class="meme-face">😛🎀<div class="meme-hand l" style="color:hotpink;font-family:monospace;font-weight:bold;text-shadow: 2px 2px white,-2px -2px white,2px -2px white,-2px 2px white">6</div><div class="meme-hand r" style="color:hotpink;font-family:monospace;font-weight:bold;text-shadow: 2px 2px white,-2px -2px white,2px -2px white,-2px 2px white">7</div></div>',
-        '<div class="meme-face">😏<div class="meme-hand l" style="left:-10px;bottom:-50px">👟</div><div class="meme-hand r" style="right:-10px;bottom:-50px">👟</div><div class="meme-hand l" style="left:-40px;bottom:20px;color:black;font-family:sans-serif;font-weight:900;">6</div><div class="meme-hand r" style="right:-40px;bottom:20px;color:black;font-family:sans-serif;font-weight:900;">7</div></div>',
-        '<div class="meme-face">😒<div style="position:absolute;top:-20px;right:-10px;font-size:40px;">🎀</div><div class="meme-hand l" style="font-family:serif;font-size:50px;color:black">6</div><div class="meme-hand r" style="font-family:serif;font-size:50px;color:black">7</div></div>',
-        '<div class="meme-face">😎<div style="position:absolute;top:-30px;left:-10px;font-size:50px;transform:rotate(-15deg)">👑</div><div class="meme-hand l" style="font-size:50px;color:black;font-family:sans-serif">6</div><div class="meme-hand r" style="font-size:50px;color:black;font-family:sans-serif">7</div></div>',
-        '<div class="meme-face">😆<div class="meme-hand l" style="color:gold;font-family:sans-serif;font-weight:900;text-shadow:2px 2px #b8860b,-1px -1px #fff;font-size:50px">6</div><div class="meme-hand r" style="color:gold;font-family:sans-serif;font-weight:900;text-shadow:2px 2px #b8860b,-1px -1px #fff;font-size:50px">7</div></div>',
-        '<div class="meme-face" style="font-size:60px;">🤙 👈</div>',
-      ];
-
-      function setRandomWinMeme(side) {
-        const id = side === "left" ? "memeLeft" : "memeRight";
-        $(id).innerHTML =
-          WIN_MEMES[Math.floor(Math.random() * WIN_MEMES.length)];
-      }
+      const $ = (id) => document.getElementById(id);
 
       const COLORS = [
-        { bg: "linear-gradient(135deg, #ff9ee5, #ff5ab8)", id: "pink" },
-        { bg: "linear-gradient(135deg, #9eecff, #5ab8ff)", id: "cyan" },
-        { bg: "linear-gradient(135deg, #ffd89e, #ff9e5a)", id: "orange" },
-        { bg: "linear-gradient(135deg, #c8ff9e, #5ad88a)", id: "green" },
-        { bg: "linear-gradient(135deg, #d4b8ff, #9e5aff)", id: "purple" },
+        { id: "lime", hex: "#ccff00", text: "#000", name: "VERDE" },
+        { id: "magenta", hex: "#ff00ff", text: "#fff", name: "ROSA" },
+        { id: "cyan", hex: "#00ffff", text: "#000", name: "CIAN" },
+        { id: "red", hex: "#ff2200", text: "#fff", name: "ROJO" },
       ];
 
       // ====== ESTADO DEL JUEGO ======
       let mode = null; // 'duel' | 'ai' | 'king'
-      let players = [];
+      let aiDifficulty = "pro"; // 'easy' | 'pro' | 'master'
+      let wildcardEnabled = false; // Desactivado por defecto; opcional desde portada
+      let players = ["ALEX", "MARTA", "DIEGO"];
       let stats = {};
-      let kingIdx = null;
+      let kingIdx = 0;
       let challengerIdx = 1;
+      let queue = [];
       let currentStreak = 0;
-      let topName = "Jugador 1",
-        bottomName = "Jugador 2";
-      let leftCard = null,
-        rightCard = null;
+
+      let bottomName = "Jugador 1"; // Lado 'left' (inferior)
+      let topName = "Jugador 2"; // Lado 'right' (superior)
+
+      let leftCard = null;
+      let rightCard = null;
       let nextSide = "left";
-      let scoreLeft = 0,
-        scoreRight = 0;
-      let comboLeft = 0,
-        comboRight = 0;
-      let leftName = "Jugador 1",
-        rightName = "Jugador 2";
-      let cardTimer = null;
-      const INITIAL_DELAY = 1200;
-      const MIN_DELAY = 380;
-      let currentDelay = INITIAL_DELAY;
+      let scoreLeft = 0;
+      let scoreRight = 0;
+      let streakLeft = 0;
+      let streakRight = 0;
+      const targetPoints = 5;
+
       let gameActive = false;
-      let isResolvingTap = false; // Candado atómico contra condiciones de carrera y dobles pulsaciones
+      let isResolvingTap = false;
       let cardsSinceLastWin = 0;
-
-      // Variables de IA Rival & Telemetría TFM
-      let aiDifficulty = "pro"; // 'novice' | 'pro' | 'master'
+      let dealTimer = null;
       let aiTimer = null;
-      let cardSpawnTimestamp = performance.now();
-      let sessionTelemetry = {
-        taps: [],
-        fastestTap: null,
-        totalWins: 0,
-        totalFails: 0,
-        trapsFailed: 0,
-      };
+      let countdownTimer = null;
+      let resolveTimer = null;
+      let toastTimer = null;
+      let speechTimer = null;
+      let muted = false;
+      let audioCtx = null;
+      let preferredVoice = null;
 
-      // Web Speech API & AI Shoutcaster
-      function initSpeech() {
-        if (!window.speechSynthesis) return;
+      // ====== AUDIO & VOZ SINCRONIZADOS (LATENCIA CERO) ======
+      function initVoices() {
+        if (!("speechSynthesis" in window)) return;
+        const voices = window.speechSynthesis.getVoices();
+        if (voices && voices.length) {
+          preferredVoice =
+            voices.find((v) => v.localService && v.lang && v.lang.toLowerCase().startsWith("es")) ||
+            voices.find((v) => v.lang && v.lang.toLowerCase().startsWith("es")) ||
+            voices[0];
+        }
+      }
+      if ("speechSynthesis" in window) {
+        initVoices();
+        window.speechSynthesis.onvoiceschanged = initVoices;
+      }
+
+      function getAudio() {
+        if (muted) return null;
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (Ctx) audioCtx = new Ctx({ latencyHint: "interactive" });
+        }
+        if (audioCtx && audioCtx.state === "suspended") {
+          audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+      }
+
+      // Desbloquea el motor de audio en el primer toque para eliminar cualquier retraso inicial
+      function unlockAudioEngine() {
         try {
-          const warmup = new SpeechSynthesisUtterance("");
-          warmup.volume = 0;
-          window.speechSynthesis.speak(warmup);
+          const ctx = getAudio();
+          if (ctx) {
+            const buf = ctx.createBuffer(1, 1, 22050);
+            const src = ctx.createBufferSource();
+            src.buffer = buf;
+            src.connect(ctx.destination);
+            src.start(0);
+          }
+          initVoices();
+        } catch (e) {}
+      }
+      window.addEventListener("pointerdown", unlockAudioEngine, { once: true, passive: true });
+      window.addEventListener("touchstart", unlockAudioEngine, { once: true, passive: true });
+      window.addEventListener("keydown", unlockAudioEngine, { once: true, passive: true });
+
+      function playDealSound(card) {
+        try {
+          const ctx = getAudio();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const g = ctx.createGain();
+
+          if (card && card.kind === "jackpot") {
+            osc.type = "square";
+            osc.frequency.setValueAtTime(523.25, now);
+            osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.09);
+            g.gain.setValueAtTime(0.14, now);
+            g.gain.exponentialRampToValueAtTime(0.005, now + 0.095);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+            return;
+          }
+
+          if (card && card.kind === "bomb") {
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(65, now + 0.08);
+            g.gain.setValueAtTime(0.14, now);
+            g.gain.exponentialRampToValueAtTime(0.005, now + 0.085);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.09);
+            return;
+          }
+
+          const isSeven = card && card.num === 7;
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(isSeven ? 350 : 280, now);
+          osc.frequency.exponentialRampToValueAtTime(isSeven ? 660 : 540, now + 0.055);
+          g.gain.setValueAtTime(0.12, now);
+          g.gain.exponentialRampToValueAtTime(0.005, now + 0.055);
+          osc.connect(g);
+          g.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
         } catch (e) {}
       }
 
-      function speak(text, opts = {}) {
-        if (!window.speechSynthesis) return;
+      function playWinSound(isBig) {
+        try {
+          const ctx = getAudio();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          const freqs = isBig ? [523.25, 659.25, 783.99, 1046.5] : [523.25, 659.25, 783.99];
+          freqs.forEach((f, i) => {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = "square";
+            osc.frequency.setValueAtTime(f, now + i * 0.045);
+            g.gain.setValueAtTime(0.16, now + i * 0.045);
+            g.gain.exponentialRampToValueAtTime(0.008, now + i * 0.045 + 0.14);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(now + i * 0.045);
+            osc.stop(now + i * 0.045 + 0.15);
+          });
+        } catch (e) {}
+      }
+
+      function playFailSound() {
+        try {
+          const ctx = getAudio();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const g = ctx.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(165, now);
+          osc.frequency.setValueAtTime(105, now + 0.1);
+          g.gain.setValueAtTime(0.2, now);
+          g.gain.exponentialRampToValueAtTime(0.008, now + 0.24);
+          osc.connect(g);
+          g.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } catch (e) {}
+      }
+
+      function speakText(txt) {
+        if (muted || !("speechSynthesis" in window)) return;
         try {
           window.speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(text);
-          u.lang = opts.lang || "en-US";
-          u.rate = opts.rate || 1.3;
-          u.pitch = opts.pitch || 1.3;
-          u.volume = 0.9;
-          const voices = window.speechSynthesis.getVoices();
-          if (opts.lang && opts.lang.startsWith("es")) {
-            const esVoice = voices.find(v => v.lang.startsWith("es"));
-            if (esVoice) u.voice = esVoice;
-          } else {
-            const en = voices.find(
-              (v) => (v.lang.startsWith("en") && !v.name.includes("Google")) || v.lang.startsWith("en")
-            );
-            if (en) u.voice = en;
-          }
+          const u = new SpeechSynthesisUtterance(txt);
+          if (preferredVoice) u.voice = preferredVoice;
+          u.lang = "es-ES";
+          u.rate = 1.38;
+          u.pitch = 1.08;
+          u.volume = 1;
           window.speechSynthesis.speak(u);
         } catch (e) {}
       }
 
-      let lastShoutcast = 0;
-      function sayShoutcast(type, extra = "") {
-        if (!window.speechSynthesis) return;
-        const now = Date.now();
-        if (now - lastShoutcast < 1600) return;
-        lastShoutcast = now;
-
-        let phrases = [];
-        if (type === "deuce") {
-          phrases = ["¡Empate a dos! ¡Muerte súbita, a ganar por dos!", "¡Deuce! ¡Máxima tensión en la pista!", "¡Muerte súbita activada!"];
-        } else if (type === "advantage") {
-          phrases = [`¡Ventaja y punto de partido para ${extra}!`, `¡Ventaja para ${extra}!`, `¡${extra} a uno de la victoria!`];
-        } else if (type === "set_win") {
-          phrases = [`¡Victoria definitiva para ${extra}!`, `¡Partidazo épico para ${extra}!`, `¡Set para ${extra}!`];
-        }
-
-        if (phrases.length === 0) return;
-        const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-        speak(phrase, { lang: "es-ES", rate: 1.25, pitch: 1.2 });
+      function toggleMute() {
+        muted = !muted;
+        $("muteBtn").textContent = muted ? "🔇" : "🔊";
       }
 
-      function sayWin(specialType) {
-        if (specialType === "jackpot") {
-          speak("Jackpot!", { rate: 1.4, pitch: 1.5 });
-        } else if (specialType === "wild") {
-          speak("Rainbow Six Seven!", { rate: 1.4, pitch: 1.4 });
-        } else {
-          const cheers = ["Six Seven!", "¡Six Seven!", "Yes!", "¡Punto!"];
-          speak(cheers[Math.floor(Math.random() * cheers.length)], { rate: 1.4, pitch: 1.4 });
-        }
-      }
-      function sayFail(isBomb, isTrap) {
-        if (isBomb) {
-          speak("Boom!", { rate: 1.5, pitch: 0.8 });
-        } else if (isTrap) {
-          speak("¡Trampa Seven Six!", { lang: "es-ES", rate: 1.6, pitch: 1.1 });
-        } else {
-          speak("No, no!", { lang: "es-ES", rate: 1.8, pitch: 0.9 });
+      function toggleWildcardOption() {
+        wildcardEnabled = !wildcardEnabled;
+        const btn = $("wildcardToggleBtn");
+        const txt = $("wildcardToggleText");
+        if (btn) btn.classList.toggle("active", wildcardEnabled);
+        if (txt) {
+          txt.textContent = wildcardEnabled ? "🌈 COMODÍN 4 COLORES: ON" : "🌈 COMODÍN: OFF";
         }
       }
 
-      function openRulesModal() {
+      // ====== NAVEGACIÓN Y MODALES ======
+      function showScreen(id) {
+        document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+        $(id).classList.add("active");
+      }
+
+      function closeAllModals() {
+        document.querySelectorAll(".modal").forEach((m) => m.classList.remove("active"));
+      }
+
+      function openRules() {
         $("rulesModal").classList.add("active");
       }
-      function closeRulesModal() {
+      function closeRules() {
         $("rulesModal").classList.remove("active");
       }
 
-      // Modales de IA y Telemetría
       function openAISetupModal() {
         $("aiSetupModal").classList.add("active");
       }
       function closeAISetupModal() {
         $("aiSetupModal").classList.remove("active");
       }
-      function selectAIDifficulty(diff) {
-        aiDifficulty = diff;
-        ["novice", "pro", "master"].forEach(d => {
-          const cap = d.charAt(0).toUpperCase() + d.slice(1);
-          const btn = $(`diffBtn${cap}`);
-          const chk = $(`diffCheck${cap}`);
-          if (btn) btn.classList.toggle("selected", d === diff);
-          if (chk) chk.textContent = (d === diff) ? "🟢" : "⚪";
-        });
-      }
-      function startAIMatch() {
-        closeAISetupModal();
-        mode = "ai";
-        topName = "Jugador 1";
-        const diffLabels = { novice: "Cortex-Novato", pro: "Cortex-Pro", master: "DeepSeven-AI 👑" };
-        bottomName = `🤖 ${diffLabels[aiDifficulty] || "Cortex-AI"}`;
-        startCountdownAndPlay();
+
+      function selectAIDifficulty(level) {
+        aiDifficulty = level;
+        $("diffEasy").classList.toggle("selected", level === "easy");
+        $("diffPro").classList.toggle("selected", level === "pro");
+        $("diffMaster").classList.toggle("selected", level === "master");
       }
 
-      function openTelemetryModal() {
-        updateTelemetryDashboard();
-        $("telemetryModal").classList.add("active");
-      }
-      function closeTelemetryModal() {
-        $("telemetryModal").classList.remove("active");
-      }
-      function resetTelemetryData() {
-        sessionTelemetry = {
-          taps: [],
-          fastestTap: null,
-          totalWins: 0,
-          totalFails: 0,
-          trapsFailed: 0,
-        };
-        updateTelemetryDashboard();
-      }
-
-      function recordTelemetry(side, latency, winObj) {
-        sessionTelemetry.taps.push({
-          side,
-          latency,
-          win: winObj.win,
-          isTrap: winObj.isTrap || false,
-          isBomb: winObj.isBomb || false,
-          isJackpot: winObj.isJackpot || false,
-          timestamp: Date.now()
-        });
-        if (winObj.win) {
-          sessionTelemetry.totalWins++;
-          if (!sessionTelemetry.fastestTap || latency < sessionTelemetry.fastestTap) {
-            sessionTelemetry.fastestTap = latency;
-          }
-        } else {
-          sessionTelemetry.totalFails++;
-          if (winObj.isTrap || winObj.isBomb) {
-            sessionTelemetry.trapsFailed++;
-          }
+      function clearTimers() {
+        if (dealTimer) {
+          clearTimeout(dealTimer);
+          dealTimer = null;
         }
-      }
-
-      function updateTelemetryDashboard() {
-        const taps = sessionTelemetry.taps;
-        const total = taps.length;
-        if (total === 0) {
-          $("telAvgReaction").textContent = "— ms";
-          $("telFastestReaction").textContent = "— ms";
-          $("telAccuracy").textContent = "— %";
-          $("telTrapsAvoided").textContent = "— %";
-          $("telemetryGradeBadge").textContent = "Sin Datos";
-          $("telemetryGradeBadge").style.color = "#aaa";
-          $("telemetryGradeDesc").textContent = "Juega una partida para computar tu latencia y métricas psicométricas.";
-          $("telCognitiveNote").textContent = "Registrando telemetría sensoriomotora en tiempo real...";
-          return;
-        }
-
-        const winTaps = taps.filter(t => t.win);
-        const avgLatency = winTaps.length
-          ? Math.round(winTaps.reduce((acc, t) => acc + t.latency, 0) / winTaps.length)
-          : Math.round(taps.reduce((acc, t) => acc + t.latency, 0) / taps.length);
-
-        const fastest = sessionTelemetry.fastestTap || "—";
-        const accuracy = Math.round((sessionTelemetry.totalWins / Math.max(1, (sessionTelemetry.totalWins + sessionTelemetry.totalFails))) * 100);
-        
-        // Trampas evitadas
-        const trapsFailed = sessionTelemetry.trapsFailed;
-        const trapsAvoidedPct = trapsFailed === 0 ? 100 : Math.max(0, 100 - (trapsFailed * 25));
-
-        $("telAvgReaction").textContent = `${avgLatency} ms`;
-        $("telFastestReaction").textContent = fastest !== "—" ? `${fastest} ms` : "— ms";
-        $("telAccuracy").textContent = `${accuracy}%`;
-        $("telTrapsAvoided").textContent = `${trapsAvoidedPct}%`;
-
-        // Evaluación académica TFM
-        let grade = "Aprobado";
-        let color = "#fff";
-        let desc = "Rendimiento funcional en discriminación binaria.";
-        let note = "Tiempo de respuesta estándar. Se recomienda acelerar la lectura de color para evitar trampas 7-6.";
-
-        if (avgLatency <= 380 && accuracy >= 88 && trapsAvoidedPct >= 90) {
-          grade = "Matrícula de Honor 🏆";
-          color = "#ffd700";
-          desc = "Nivel Neuro-Cognitivo Sobresaliente. Reflejos de nivel profesional.";
-          note = "Control inhibitorio excepcional frente a efecto Stroop y distractores tipo 7-6. Latencia premotora óptima.";
-        } else if (avgLatency <= 460 && accuracy >= 75) {
-          grade = "Sobresaliente ⚡";
-          color = "var(--holo-1)";
-          desc = "Gran agilidad sensoriomotora y alta precisión bajo presión.";
-          note = "Muy buen tiempo de reacción medio y sólida resiliencia durante la fase de muerte súbita.";
-        } else if (avgLatency <= 580 && accuracy >= 60) {
-          grade = "Notable 🎯";
-          color = "var(--holo-3)";
-          desc = "Buen procesamiento visual pero con ligera vacilación motora.";
-          note = "Se observa mayor latencia en cartas dobles y señuelos de color invertido.";
-        }
-
-        $("telemetryGradeBadge").textContent = grade;
-        $("telemetryGradeBadge").style.color = color;
-        $("telemetryGradeDesc").textContent = desc;
-        $("telCognitiveNote").textContent = note;
-      }
-
-      // Agente Autónomo de IA
-      function clearAITimer() {
         if (aiTimer) {
           clearTimeout(aiTimer);
           aiTimer = null;
         }
-      }
-
-      function processAITurn(winState) {
-        clearAITimer();
-        if (mode !== "ai" || !gameActive || isResolvingTap) return;
-
-        let baseDelay = 460;
-        let jitter = 100;
-        let blunderChance = 0.08;
-        let hitRate = 0.95;
-
-        if (aiDifficulty === "novice") {
-          baseDelay = 680;
-          jitter = 180;
-          blunderChance = 0.28;
-          hitRate = 0.85;
-        } else if (aiDifficulty === "master") {
-          baseDelay = Math.max(260, currentDelay * 0.52);
-          jitter = 50;
-          blunderChance = 0.02;
-          hitRate = 0.99;
-        } else {
-          baseDelay = Math.max(380, currentDelay * 0.65);
-          jitter = 90;
-          blunderChance = 0.07;
-          hitRate = 0.95;
+        if (countdownTimer) {
+          clearInterval(countdownTimer);
+          countdownTimer = null;
         }
-
-        const reactionTime = Math.max(210, Math.round(baseDelay + (Math.random() * jitter * 2 - jitter)));
-
-        if (winState.win) {
-          if (Math.random() < hitRate) {
-            aiTimer = setTimeout(() => {
-              if (gameActive && !isResolvingTap && mode === "ai") {
-                tap("right");
-              }
-            }, reactionTime);
-          }
-        } else if (winState.isTrap || winState.isBomb) {
-          if (Math.random() < blunderChance) {
-            aiTimer = setTimeout(() => {
-              if (gameActive && !isResolvingTap && mode === "ai") {
-                tap("right");
-              }
-            }, reactionTime + 40);
-          }
+        if (resolveTimer) {
+          clearTimeout(resolveTimer);
+          resolveTimer = null;
+        }
+        if (speechTimer) {
+          clearTimeout(speechTimer);
+          speechTimer = null;
         }
       }
 
-      function showScreen(id) {
-        document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
-        document.querySelectorAll(".game").forEach((g) => g.classList.remove("active"));
-        document.querySelectorAll(".modal").forEach((m) => m.classList.remove("active"));
-        const el = $(id);
-        if (el) el.classList.add("active");
-      }
-      function hideModal(id) {
-        const el = $(id);
-        if (el) el.classList.remove("active");
-      }
-
-      // ====== NAVEGACIÓN ======
       function goHome() {
         gameActive = false;
         isResolvingTap = false;
-        clearTimeout(cardTimer);
-        clearAITimer();
-        mode = null;
-        players = [];
-        stats = {};
-        renderPlayerList();
-        $("playerInput").value = "";
-        $("startKingBtn").disabled = true;
+        clearTimers();
+        if (toastTimer) {
+          clearTimeout(toastTimer);
+          toastTimer = null;
+        }
+        $("popToast").classList.remove("show");
+        $("countdownOverlay").classList.remove("active");
+        $("laneLeft").classList.remove("flash-win", "flash-fail");
+        $("laneRight").classList.remove("flash-win", "flash-fail");
+        closeAllModals();
         showScreen("home");
       }
-      function exitToMenu() {
-        gameActive = false;
-        isResolvingTap = false;
-        clearTimeout(cardTimer);
-        clearAITimer();
-        scoreLeft = 0;
-        scoreRight = 0;
-        comboLeft = 0;
-        comboRight = 0;
-        goHome();
-      }
+
+      // ====== MODO DUELO 1v1 & IA ======
       function goDuel() {
+        unlockAudioEngine();
         mode = "duel";
-        topName = "Jugador 1";
-        bottomName = "Jugador 2";
-        startCountdownAndPlay();
+        bottomName = "Jugador 1";
+        topName = "Jugador 2";
+        $("leftTapHint").textContent = "👆 ¡TOCA TU CARTA!";
+        $("topTapHint").textContent = "👆 ¡TOCA TU CARTA!";
+        closeAllModals();
+        showScreen("game");
+        startCountdown();
       }
+
+      function startAIGame() {
+        unlockAudioEngine();
+        mode = "ai";
+        bottomName = "Tú";
+        topName =
+          aiDifficulty === "easy"
+            ? "🤖 Bot Novato"
+            : aiDifficulty === "pro"
+            ? "🤖 Bot Competitivo"
+            : "🤖 Bot Maestro";
+        $("leftTapHint").textContent = "👆 ¡TOCA CUALQUIER CARTA!";
+        $("topTapHint").textContent = "🤖 RIVAL AUTOMÁTICO";
+        closeAllModals();
+        showScreen("game");
+        startCountdown();
+      }
+
+      function rematchDuel() {
+        unlockAudioEngine();
+        closeAllModals();
+        startCountdown();
+      }
+
+      // ====== MODO REY DE LA PISTA ======
       function goKingSetup() {
-        mode = "king";
+        renderChips();
         showScreen("kingSetup");
       }
 
-      // ====== SETUP ======
+      function renderChips() {
+        const wrap = $("playerChips");
+        wrap.innerHTML = "";
+        players.forEach((p, idx) => {
+          const el = document.createElement("div");
+          el.className = "chip";
+          el.innerHTML = `${p} <span onclick="removePlayer(${idx})">×</span>`;
+          wrap.appendChild(el);
+        });
+      }
+
       function addPlayer() {
-        const input = $("playerInput");
-        const name = input.value.trim();
-        if (!name) return;
-        if (players.includes(name)) {
-          input.value = "";
-          return;
-        }
-        if (players.length >= 10) return;
-        players.push(name);
-        stats[name] = { wins: 0, maxStreak: 0 };
-        input.value = "";
-        renderPlayerList();
-        $("startKingBtn").disabled = players.length < 3;
-        input.focus();
+        const inp = $("playerInput");
+        const val = inp.value.trim().toUpperCase();
+        if (!val || players.includes(val) || players.length >= 8) return;
+        players.push(val);
+        inp.value = "";
+        renderChips();
       }
-      function removePlayer(name) {
-        players = players.filter((p) => p !== name);
-        delete stats[name];
-        renderPlayerList();
-        $("startKingBtn").disabled = players.length < 3;
+
+      function removePlayer(idx) {
+        if (players.length <= 3) return;
+        players.splice(idx, 1);
+        renderChips();
       }
-      function renderPlayerList() {
-        $("playerList").innerHTML = players
-          .map(
-            (p) =>
-              `<div class="player-chip">${escapeHtml(p)} <span class="remove" data-remove="${escapeHtml(p)}">✕</span></div>`,
-          )
-          .join("");
-      }
-      function startKing() {
+
+      function startKingGame() {
         if (players.length < 3) return;
-        players = players.sort(() => Math.random() - 0.5);
-        kingIdx = null;
+        unlockAudioEngine();
+        mode = "king";
+        stats = {};
+        players.forEach((p) => {
+          stats[p] = { wins: 0, streak: 0 };
+        });
+        kingIdx = 0;
         challengerIdx = 1;
+        queue = players.map((_, i) => i).slice(2);
         currentStreak = 0;
-        showPrematch();
-      }
-      function showPrematch() {
-        if (kingIdx === null) {
-          $("lblKing").textContent = "Jugador 1";
-          $("iconCrown").style.display = "none";
-          $("kingNameDisplay").textContent = players[0];
-          $("lblChallenger").textContent = "Jugador 2";
-          $("challengerNameDisplay").textContent = players[1];
-          $("streakDisplay").textContent = "Primera batalla";
-          const queue = [];
-          for (let i = 2; i < players.length; i++) queue.push(players[i]);
-          $("queueList").textContent = queue.length ? queue.join("  →  ") : "—";
-        } else {
-          $("lblKing").textContent = "👑 Reinando";
-          $("iconCrown").style.display = "block";
-          $("kingNameDisplay").textContent = players[kingIdx];
-          $("lblChallenger").textContent = "retador";
-          $("challengerNameDisplay").textContent = players[challengerIdx];
-          $("streakDisplay").textContent =
-            currentStreak === 0 ? "nueva era" : `racha de ${currentStreak}`;
-          const queue = [];
-          for (let i = 1; i <= players.length - 1; i++) {
-            const idx = (challengerIdx + i) % players.length;
-            if (idx === kingIdx) continue;
-            queue.push(players[idx]);
-          }
-          $("queueList").textContent = queue.length ? queue.join("  →  ") : "—";
-        }
-        showScreen("prematch");
-      }
-      function beginRound() {
-        if (kingIdx === null) {
-          topName = players[0];
-          bottomName = players[1];
-        } else {
-          topName = players[kingIdx];
-          bottomName = players[challengerIdx];
-        }
-        startCountdownAndPlay();
+        bottomName = "👑 " + players[kingIdx];
+        topName = "⚡ " + players[challengerIdx];
+        $("leftTapHint").textContent = "👆 ¡TOCA TU CARTA!";
+        $("topTapHint").textContent = "👆 ¡TOCA TU CARTA!";
+        closeAllModals();
+        showScreen("game");
+        startCountdown();
       }
 
-      // ====== INICIO Y VELOCIDAD ======
-      function updateSpeedometer() {
-        const factor = (INITIAL_DELAY / currentDelay).toFixed(1);
-        const progress = Math.min(100, Math.max(10, ((INITIAL_DELAY - currentDelay) / (INITIAL_DELAY - MIN_DELAY)) * 100));
-        const speedBar = $("speedBar");
-        const speedLabel = $("speedLabel");
-        if (speedBar) speedBar.style.width = progress + "%";
-        if (speedLabel) {
-          if (progress > 75) {
-            speedLabel.textContent = `🔥 RITMO: x${factor} (¡EXTREMO!) 🔥`;
-            speedLabel.style.color = "var(--holo-4)";
-          } else if (progress > 40) {
-            speedLabel.textContent = `⚡ RITMO: x${factor} (ACELERANDO) ⚡`;
-            speedLabel.style.color = "var(--holo-1)";
-          } else {
-            speedLabel.textContent = `⚡ VELOCIDAD: x${factor} ⚡`;
-            speedLabel.style.color = "white";
+      function nextKingRound() {
+        unlockAudioEngine();
+        closeAllModals();
+        bottomName = "👑 " + players[kingIdx];
+        topName = "⚡ " + players[challengerIdx];
+        startCountdown();
+      }
+
+      // ====== LÓGICA DE PARTIDA Y MUERTE SÚBITA ======
+      function resetCardEl(id) {
+        const el = $(id);
+        el.className = "card empty";
+        el.style.background = "";
+        el.style.color = "";
+        el.innerHTML = `<div class="card-num" style="color:#2a2a2a;-webkit-text-stroke:0">•</div>`;
+      }
+
+      function updateScoreHUD() {
+        $("bottomPlayerLabel").textContent = bottomName;
+        $("topPlayerLabel").textContent = topName;
+        $("scoreLeft").textContent = scoreLeft;
+        $("scoreRight").textContent = scoreRight;
+
+        const sL = $("streakLeft");
+        const sR = $("streakRight");
+        if (streakLeft >= 2) {
+          sL.textContent = `🔥 RACHA x${streakLeft}`;
+          sL.classList.add("show");
+        } else {
+          sL.classList.remove("show");
+        }
+        if (streakRight >= 2) {
+          sR.textContent = `🔥 RACHA x${streakRight}`;
+          sR.classList.add("show");
+        } else {
+          sR.classList.remove("show");
+        }
+        updateMatchPointBanner();
+      }
+
+      function updateMatchPointBanner() {
+        const banner = $("matchPointBanner");
+        banner.className = "match-point-banner";
+        const deuceAt = targetPoints - 1; // 2 puntos
+
+        // Si ambos están en >= 2 puntos -> Muerte Súbita (hay que ganar de 2)
+        if (scoreLeft >= deuceAt && scoreRight >= deuceAt) {
+          const diff = Math.abs(scoreLeft - scoreRight);
+          if (diff === 0) {
+            banner.classList.add("deuce");
+            banner.textContent = `⚡ MUERTE SÚBITA · EMPATE ${scoreLeft}-${scoreRight} (GANA DE 2) ⚡`;
+            return;
           }
+          if (diff === 1) {
+            const leader = scoreLeft > scoreRight ? bottomName : topName;
+            banner.classList.add("sudden-death");
+            banner.textContent = `🔥 VENTAJA ${leader.toUpperCase()} (${scoreLeft}-${scoreRight}) · A 1 DE GANAR 🔥`;
+            return;
+          }
+        }
+
+        if (scoreLeft === deuceAt && scoreRight < deuceAt) {
+          banner.classList.add("active");
+          banner.textContent = `🔥 PUNTO DE PARTIDO PARA ${bottomName.toUpperCase()} 🔥`;
+        } else if (scoreRight === deuceAt && scoreLeft < deuceAt) {
+          banner.classList.add("active");
+          banner.textContent = `🔥 PUNTO DE PARTIDO PARA ${topName.toUpperCase()} 🔥`;
+        } else {
+          banner.textContent = `META: ${targetPoints} PUNTOS (GANA DE 2 EN EMPATE)`;
         }
       }
 
-      // Comprobación matemática de set con regla estricta de Muerte Súbita a 2 puntos de ventaja
-      function checkSetVictory() {
-        const maxScore = Math.max(scoreLeft, scoreRight);
+      // Verifica si algún jugador ha ganado el set (mínimo 3 puntos Y diferencia >= 2)
+      function checkSetWinner() {
+        const max = Math.max(scoreLeft, scoreRight);
         const diff = Math.abs(scoreLeft - scoreRight);
-        // Debe alcanzar al menos 3 puntos Y al menos 2 puntos de ventaja
-        if (maxScore >= 3 && diff >= 2) {
+        if (max >= targetPoints && diff >= 2) {
           return scoreLeft > scoreRight ? "left" : "right";
         }
         return null;
       }
 
-      function updateMatchPointBanner() {
-        const banner = $("matchPointBanner");
-        if (!banner) return;
-        banner.classList.remove("sudden-death");
-
-        const diff = Math.abs(scoreLeft - scoreRight);
-        const isSuddenDeath = (scoreLeft >= 2 && scoreRight >= 2);
-
-        if (isSuddenDeath) {
-          banner.style.display = "block";
-          banner.classList.add("sudden-death");
-          if (diff === 0) {
-            banner.textContent = `⚡ ¡MUERTE SÚBITA: DEUCE (${scoreLeft}-${scoreRight})! GANAR POR 2 PUNTOS ⚡`;
-            banner.style.background = "";
-            banner.style.color = "#000";
-            sayShoutcast("deuce", `${scoreLeft}`);
-            playMatchPointSound();
-          } else if (diff === 1) {
-            const leader = scoreLeft > scoreRight ? leftName.replace("👑 ", "") : rightName.replace("👑 ", "");
-            banner.textContent = `🔥 VENTAJA ${leader.toUpperCase()} (MATCH POINT: +2 DIFERENCIA) 🔥`;
-            banner.style.background = "var(--holo-4)";
-            banner.style.color = "#fff";
-            sayShoutcast("advantage", leader);
-            playMatchPointSound();
-          }
-        } else if (scoreLeft === 2 || scoreRight === 2) {
-          banner.style.display = "block";
-          const leader = scoreLeft === 2 ? leftName.replace("👑 ", "") : rightName.replace("👑 ", "");
-          banner.textContent = `🔥 PUNTO DE PARTIDO PARA ${leader.toUpperCase()} 🔥`;
-          banner.style.background = "var(--holo-4)";
-          banner.style.color = "black";
-          playMatchPointSound();
-        } else {
-          banner.style.display = "none";
-        }
-      }
-
-      function updateComboUI() {
-        const cLeft = $("comboLeft");
-        const cRight = $("comboRight");
-        if (cLeft) {
-          if (comboLeft >= 2) {
-            cLeft.style.display = "inline-flex";
-            cLeft.textContent = `COMBO x${comboLeft} 🔥`;
-          } else {
-            cLeft.style.display = "none";
-          }
-        }
-        if (cRight) {
-          if (comboRight >= 2) {
-            cRight.style.display = "inline-flex";
-            cRight.textContent = `COMBO x${comboRight} 🔥`;
-          } else {
-            cRight.style.display = "none";
-          }
-        }
-      }
-
-      function startCountdownAndPlay() {
-        if (mode === "duel") {
-          leftName = "Jugador 1";
-          rightName = "Jugador 2";
-          $("streakLeft").style.display = "none";
-          $("streakRight").style.display = "none";
-        } else {
-          if (kingIdx === null) {
-            leftName = topName;
-            rightName = bottomName;
-            $("streakLeft").style.display = "none";
-            $("streakRight").style.display = "none";
-          } else {
-            leftName = "👑 " + topName;
-            rightName = bottomName;
-            $("streakLeft").style.display = "inline-flex";
-            $("streakLeft").innerHTML = `🔥 racha: ${currentStreak}`;
-            $("streakRight").style.display = "none";
-          }
-        }
-        $("nameLeft").textContent = leftName;
-        $("nameRight").textContent = rightName;
-        scoreLeft = 0;
-        scoreRight = 0;
-        comboLeft = 0;
-        comboRight = 0;
-        $("scoreLeft").textContent = "0";
-        $("scoreRight").textContent = "0";
-        updateComboUI();
-        updateMatchPointBanner();
-
-        showScreen("game");
-
-        const cd = $("countdown");
-        const seq = ["3", "2", "1", "¡YA!"];
-        let i = 0;
-        cd.classList.add("active");
-        const show = () => {
-          if (i >= seq.length) {
-            cd.classList.remove("active");
-            cd.classList.remove("bump");
-            beginCards();
-            return;
-          }
-          cd.textContent = seq[i];
-          cd.classList.remove("bump");
-          void cd.offsetWidth;
-          cd.classList.add("bump");
-          playTone(440 + i * 110, "triangle", 0.15, 0.15);
-          i++;
-          setTimeout(show, 650);
-        };
-        show();
-      }
-
-      function scheduleNextCard() {
-        if (!gameActive) return;
-        clearTimeout(cardTimer);
-        cardTimer = setTimeout(() => {
-          if (!gameActive || isResolvingTap) return;
-          newCard();
-          currentDelay = Math.max(MIN_DELAY, currentDelay * 0.94);
-          updateSpeedometer();
-          scheduleNextCard();
-        }, currentDelay);
-      }
-
-      function beginCards() {
-        gameActive = true;
+      function startCountdown() {
+        clearTimers();
+        gameActive = false;
         isResolvingTap = false;
         leftCard = null;
         rightCard = null;
-        nextSide = Math.random() < 0.5 ? "left" : "right";
+        nextSide = "left";
+        scoreLeft = 0;
+        scoreRight = 0;
+        streakLeft = 0;
+        streakRight = 0;
         cardsSinceLastWin = 0;
-        currentDelay = INITIAL_DELAY;
-        updateSpeedometer();
-        clearTimeout(cardTimer);
-        resetCardEl($("cardLeft"));
-        resetCardEl($("cardRight"));
-        newCard();
-        scheduleNextCard();
-      }
 
-      // ---- Generación de cartas balanceada y Cartas Especiales ----
-      function makeCard(opts = {}) {
-        let value, isWin67 = false, isTrap76 = false, isWild = false, isJackpot = false, isBomb = false;
-        let color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        resetCardEl("cardLeft");
+        resetCardEl("cardRight");
+        $("laneLeft").classList.remove("flash-win", "flash-fail");
+        $("laneRight").classList.remove("flash-win", "flash-fail");
+        updateScoreHUD();
 
-        switch (opts.kind) {
-          case "six":
-            value = "6";
-            break;
-          case "seven":
-            value = "7";
-            break;
-          case "wild":
-            value = "🌈";
-            isWild = true;
-            color = { bg: "", id: "wild" };
-            break;
-          case "gold-jackpot":
-            value = "👑67";
-            isJackpot = true;
-            isWin67 = true;
-            color = { bg: "", id: "gold" };
-            break;
-          case "bomb":
-            value = "💣";
-            isBomb = true;
-            color = { bg: "", id: "bomb" };
-            break;
-          case "double-win":
-            value = "67";
-            isWin67 = true;
-            break;
-          case "double-trap":
-            value = "76";
-            isTrap76 = true;
-            color = { bg: "", id: "glitch" };
-            break;
-          default: {
-            const others = [1, 2, 3, 4, 5, 8, 8, 9, 9];
-            value = String(others[Math.floor(Math.random() * others.length)]);
+        const ov = $("countdownOverlay");
+        const numEl = $("countdownNum");
+        ov.classList.add("active");
+        let count = 3;
+        numEl.textContent = count;
+        playDealSound({ num: 6, kind: "normal" });
+
+        countdownTimer = setInterval(() => {
+          count--;
+          if (count > 0) {
+            numEl.textContent = count;
+            playDealSound({ num: 6, kind: "normal" });
+          } else {
+            clearInterval(countdownTimer);
+            countdownTimer = null;
+            ov.classList.remove("active");
+            gameActive = true;
+            newCard();
           }
-        }
-        return { value, color, isWin67, isTrap76, isWild, isJackpot, isBomb };
+        }, 580);
       }
 
       function pickKind() {
-        const r = Math.random();
-        if (r < 0.20) return "six";
-        if (r < 0.40) return "seven";
-        if (r < 0.48) return "wild";          // 🌈 Wild Arcoíris
-        if (r < 0.54) return "gold-jackpot";  // 👑 Jackpot Dorado (+2 Puntos)
-        if (r < 0.62) return "bomb";          // 💣 Bomba Peligrosa
-        if (r < 0.70) return "double-win";     // 67 Doble
-        if (r < 0.80) return "double-trap";    // 76 Trampa Invertida
+        if (wildcardEnabled && Math.random() < 0.14) {
+          return "rainbow";
+        }
         return "normal";
       }
 
-      function renderCard(el, card) {
-        if (!el || !card) return;
-        el.classList.remove("wild-rainbow", "gold-jackpot", "bomb-trap", "glitch-trap", "double");
-        
-        if (card.isWild) {
-          el.classList.add("wild-rainbow");
+      function renderCardToDOM(side, card, triggerPop = true) {
+        const el = $(side === "left" ? "cardLeft" : "cardRight");
+        el.className = "card";
+        if (card.kind === "rainbow") {
+          el.classList.add("rainbow");
           el.style.background = "";
-        } else if (card.isJackpot) {
-          el.classList.add("gold-jackpot");
-          el.style.background = "";
-        } else if (card.isBomb) {
-          el.classList.add("bomb-trap");
-          el.style.background = "";
-        } else if (card.isTrap76) {
-          el.classList.add("glitch-trap");
-          el.style.background = "";
+          el.style.color = "#fff";
         } else {
-          el.style.background = card.color.bg;
+          el.style.background = card.color.hex;
+          el.style.color = card.color.text;
         }
 
-        if (card.value.length >= 2 || card.isJackpot) {
-          el.classList.add("double");
+        const icon = card.kind === "rainbow" ? "🌈" : "●";
+        const badge = card.kind === "rainbow" ? "4 COLORES" : card.color.name;
+
+        el.innerHTML = `
+          <div class="card-corner">
+            <span style="background:#000;color:#fff;padding:1px 6px;font-size:14px">${side === "left" ? "IZQ" : "DER"}</span>
+            <span style="background:#000;color:#fff;padding:1px 6px;font-size:14px">${icon}</span>
+          </div>
+          <div class="card-num">${card.num}</div>
+          <div class="card-badge">${badge}</div>
+        `;
+
+        if (triggerPop) {
+          void el.offsetWidth; // Forzar reflow para que la animación coincida al milisegundo con el sonido
+          el.classList.add("pop");
         }
-
-        el.querySelector(".num-big").textContent = card.value;
-        el.querySelector(".num-corner.tl").textContent = card.value;
-        el.querySelector(".num-corner.br").textContent = card.value;
       }
 
-      function resetCardEl(el) {
-        if (!el) return;
-        el.classList.remove("wild-rainbow", "gold-jackpot", "bomb-trap", "glitch-trap", "double");
-        el.style.background = "#222";
-        el.querySelector(".num-big").textContent = "·";
-        el.querySelector(".num-corner.tl").textContent = "·";
-        el.querySelector(".num-corner.br").textContent = "·";
-      }
-
-      // Comprobación matemática y determinista de victoria (Regla de Oro: 6 izquierda, 7 derecha)
+      // Evalúa la mesa actual de forma estricta (SOLO 6 IZQ + 7 DER del mismo color, siempre +1 punto)
       function checkWin() {
-        // 1. Peligro de Bomba
-        if (leftCard?.isBomb || rightCard?.isBomb) {
-          return { win: false, isBomb: true };
+        if (!leftCard && !rightCard) return { valid: false, pts: 1, reason: "empty" };
+
+        if (!leftCard || !rightCard) {
+          return { valid: false, pts: 1, reason: "incomplete", msg: "⚠️ ¡FALTA UNA CARTA!" };
         }
 
-        // 2. Jackpot Dorado individual (+2 Puntos)
-        if (leftCard && leftCard.isJackpot) return { win: true, reason: "jackpot", points: 2, isJackpot: true };
-        if (rightCard && rightCard.isJackpot) return { win: true, reason: "jackpot", points: 2, isJackpot: true };
+        const sameColor =
+          leftCard.color.id === rightCard.color.id ||
+          leftCard.kind === "rainbow" ||
+          rightCard.kind === "rainbow";
 
-        // 3. Carta individual "67" (+1 Punto)
-        if (leftCard && leftCard.isWin67 && !leftCard.isJackpot) return { win: true, reason: "double-win", points: 1 };
-        if (rightCard && rightCard.isWin67 && !rightCard.isJackpot) return { win: true, reason: "double-win", points: 1 };
-
-        if (!leftCard || !rightCard) return { win: false };
-
-        // 4. TRAMPA MORTAL: 7 a la izquierda y 6 a la derecha -> ¡NO ES SIX SEVEN! (Penalización)
-        if (leftCard.value === "7" && rightCard.value === "6") {
-          return { win: false, isTrap: true };
-        }
-
-        // 5. JUGADA LEGÍTIMA SIX-SEVEN: 6 a la izquierda y 7 a la derecha
-        const isLeft6 = leftCard.value === "6" || leftCard.isWild;
-        const isRight7 = rightCard.value === "7" || rightCard.isWild;
-
-        if (isLeft6 && isRight7) {
-          // Comprobar coincidencia de color o comodín arcoíris
-          const colorMatches = leftCard.isWild || rightCard.isWild || (leftCard.color.id === rightCard.color.id);
-          if (colorMatches) {
-            const isWildPair = leftCard.isWild || rightCard.isWild;
+        // Regla estricta: SOLO vale 6 a la izquierda y 7 a la derecha del mismo color (+1 punto)
+        if (leftCard.num === 6 && rightCard.num === 7) {
+          if (sameColor) {
             return {
-              win: true,
-              reason: isWildPair ? "wild-pair" : "pair",
-              points: 1,
-              isWild: isWildPair,
+              valid: true,
+              pts: 1,
+              reason: "six_seven",
+              msg: "✨ ¡SIX SEVEN! (+1)",
             };
+          } else {
+            return { valid: false, pts: 1, reason: "color", msg: "❌ ¡DISTINTO COLOR!" };
           }
         }
 
-        return { win: false };
+        // Si sale 7 a la izquierda y 6 a la derecha: SIEMPRE ES TRAMPA INVÁLIDA
+        if (leftCard.num === 7 && rightCard.num === 6) {
+          return {
+            valid: false,
+            pts: 1,
+            reason: "trap_7_6",
+            msg: "🚫 ¡TRAMPA 7-6 INVERTIDO!",
+          };
+        }
+
+        if (leftCard.num === rightCard.num) {
+          return {
+            valid: false,
+            pts: 1,
+            reason: "same_number",
+            msg: `❌ ¡ES ${leftCard.num}-${rightCard.num} (NO 6-7)!`,
+          };
+        }
+
+        return { valid: false, pts: 1, reason: "numbers", msg: "❌ ¡NO ES 6-7!" };
+      }
+
+      function resolveDealTargetSide() {
+        return nextSide;
       }
 
       function newCard() {
-        if (!gameActive) return;
+        if (!gameActive || isResolvingTap) return;
         cardsSinceLastWin++;
 
-        let kind = pickKind();
+        const targetSide = nextSide;
+        const opposite = targetSide === "left" ? rightCard : leftCard;
+
+        const kind = pickKind();
+        let color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        let num = Math.random() < 0.5 ? 6 : 7;
+
         if (cardsSinceLastWin >= 4) {
-          const other = nextSide === "left" ? rightCard : leftCard;
-          if (other && (other.value === "6" || other.value === "7")) {
-            if (Math.random() < 0.70) {
-              // Si el otro lado tiene 6 (izq) o 7 (dcha), preparar la pareja ordenada
-              if (nextSide === "left") {
-                kind = "six";
-              } else {
-                kind = "seven";
-              }
-            }
-          } else if (Math.random() < 0.35) {
-            kind = Math.random() < 0.5 ? "gold-jackpot" : "double-win";
+          // Regla anti-sequía: 6 en la izquierda, 7 en la derecha, del mismo color que la carta opuesta
+          num = targetSide === "left" ? 6 : 7;
+          if (opposite) color = opposite.color;
+        } else if (opposite && Math.random() < 0.52) {
+          color = opposite.color;
+          if (targetSide === "left" && opposite.num === 7) {
+            num = Math.random() < 0.65 ? 6 : 7;
+          } else if (targetSide === "right" && opposite.num === 6) {
+            num = Math.random() < 0.65 ? 7 : 6;
           }
         }
 
-        const card = makeCard({ kind });
-        if (cardsSinceLastWin >= 4) {
-          const other = nextSide === "left" ? rightCard : leftCard;
-          if (other && other.color && card.color && other.color.id !== "bomb" && other.color.id !== "glitch") {
-            if ((kind === "six" || kind === "seven") && (other.value === "6" || other.value === "7")) {
-              card.color = other.color;
-            } else if (kind === "double-win") {
-              card.color = other.color;
-            }
-          }
-        }
-
-        const speedFactor = parseFloat((INITIAL_DELAY / currentDelay).toFixed(1));
-        playCardSwoosh(speedFactor);
-
-        if (nextSide === "left") {
-          // Expirar cualquier carta especial de un solo turno en la derecha al caer una nueva carta
-          if (rightCard) {
-            rightCard.isJackpot = false;
-            rightCard.isWin67 = false;
-            rightCard.isBomb = false;
-            rightCard.isTrap76 = false;
-          }
+        const card = { num, color, kind };
+        if (targetSide === "left") {
           leftCard = card;
-          renderCard($("cardLeft"), card);
-          animateCard($("cardLeft"));
           nextSide = "right";
+          renderCardToDOM("left", card, true);
         } else {
-          // Expirar cualquier carta especial de un solo turno en la izquierda al caer una nueva carta
-          if (leftCard) {
-            leftCard.isJackpot = false;
-            leftCard.isWin67 = false;
-            leftCard.isBomb = false;
-            leftCard.isTrap76 = false;
-          }
           rightCard = card;
-          renderCard($("cardRight"), card);
-          animateCard($("cardRight"));
           nextSide = "left";
+          renderCardToDOM("right", card, true);
         }
 
-        const w = checkWin();
-        if (w.win) cardsSinceLastWin = 0;
+        // Sonido instantáneo en el mismo frame exacto en que se pinta la carta
+        playDealSound(card);
 
-        cardSpawnTimestamp = performance.now();
+        const w = checkWin();
+        if (w.valid) cardsSinceLastWin = 0;
+
+        const deuceAt = targetPoints - 1;
+        const isSudden = scoreLeft >= deuceAt && scoreRight >= deuceAt;
+        const currentDelay = isSudden ? 960 : 1150;
+
+        clearTimers();
+        dealTimer = setTimeout(newCard, currentDelay);
+
+        // Si estamos en modo IA, programar reacción del bot
         if (mode === "ai" && gameActive) {
-          processAITurn(w);
+          scheduleAITurn(w, currentDelay);
         }
       }
 
-      function animateCard(el) {
-        if (!el) return;
-        el.classList.remove("entering");
-        void el.offsetWidth;
-        el.classList.add("entering");
+      function scheduleAITurn(w, currentDelay) {
+        const cfg = {
+          easy: { base: 760, jitter: 170, hit: 0.72, blunder: 0.12 },
+          pro: { base: 540, jitter: 120, hit: 0.88, blunder: 0.04 },
+          master: { base: 380, jitter: 80, hit: 0.96, blunder: 0.01 },
+        }[aiDifficulty];
+
+        if (w.valid && Math.random() < cfg.hit) {
+          const delay = cfg.base + Math.random() * cfg.jitter;
+          if (delay < currentDelay - 40) {
+            aiTimer = setTimeout(() => tap("right"), delay);
+          }
+        } else if (w.reason === "trap_7_6" && Math.random() < cfg.blunder) {
+          const delay = cfg.base + 90;
+          if (delay < currentDelay - 40) {
+            aiTimer = setTimeout(() => tap("right"), delay);
+          }
+        }
       }
 
-      // ====== MANEJO ATÓMICO DE PULSACIÓN (ZERO BUGS / INSTANT CONSUME / NO REPETICIONES) ======
+      function showPopToast(title, sub, isGood) {
+        const t = $("popToast");
+        if (toastTimer) clearTimeout(toastTimer);
+        $("popToastTitle").textContent = title;
+        $("popToastTitle").style.color = isGood ? "var(--holo-1)" : "var(--holo-4)";
+        $("popToastSub").textContent = sub;
+        t.classList.add("show");
+        toastTimer = setTimeout(() => t.classList.remove("show"), 780);
+      }
+
       function tap(side) {
-        // Si el juego terminó o ya estamos resolviendo una pulsación, ignorar instantáneamente
         if (!gameActive || isResolvingTap) return;
+        if (!leftCard && !rightCard) return;
+
+        // Bloquear inmediatamente nuevas entradas y timers
         isResolvingTap = true;
-        clearTimeout(cardTimer);
-        cardTimer = null;
-        clearAITimer();
+        clearTimers();
 
-        // Medir latencia de respuesta psicomotora y registrar en telemetría
-        const tapLatency = Math.round(performance.now() - cardSpawnTimestamp);
+        const res = checkWin();
 
-        // Snapshot de la situación actual y CONSUMO INMEDIATO del estado
-        const w = checkWin();
-        const pts = w.points || 1;
-        const laneStr = side === "left" ? "laneLeft" : "laneRight";
-        const otherLaneStr = side === "left" ? "laneRight" : "laneLeft";
-
-        // Registrar telemetría
-        recordTelemetry(side, tapLatency, w);
-
-        // Desactivar inmediatamente las cartas del estado para evitar dobles lecturas o desincronizaciones
+        // Consumir estado de cartas de inmediato para que sea imposible puntuar dos veces o con lag
         leftCard = null;
         rightCard = null;
+        nextSide = "left";
+        cardsSinceLastWin = 0;
 
-        if (w.win) {
-          // Acierto legítimo (1 punto estándar, o 2 si es Jackpot Dorado)
+        const laneEl = $(side === "left" ? "laneLeft" : "laneRight");
+        const tapperName = side === "left" ? bottomName : topName;
+        const rivalSide = side === "left" ? "right" : "left";
+        const rivalName = side === "left" ? topName : bottomName;
+
+        if (res.valid) {
+          laneEl.classList.add("flash-win");
+          playWinSound(false);
+          speakText("¡Six Seven!");
+
           if (side === "left") {
-            comboLeft++;
-            comboRight = 0;
-            scoreLeft += pts;
-            $("scoreLeft").textContent = scoreLeft;
-            $(laneStr).classList.add("flash-win");
+            scoreLeft += 1;
+            streakLeft++;
+            streakRight = 0;
           } else {
-            comboRight++;
-            comboLeft = 0;
-            scoreRight += pts;
-            $("scoreRight").textContent = scoreRight;
-            $(laneStr).classList.add("flash-win");
+            scoreRight += 1;
+            streakRight++;
+            streakLeft = 0;
           }
-
-          const activeCombo = side === "left" ? comboLeft : comboRight;
-          triggerHaptic("win");
-
-          if (w.isJackpot) {
-            playJackpotSound();
-            sayWin("jackpot");
-          } else if (w.isWild) {
-            playRainbowSound();
-            sayWin("wild");
-          } else {
-            playHitSound(activeCombo);
-            sayWin("normal");
-          }
-
-          // Efectos de Confeti Viral
-          if (window.confetti) {
-            const confettiColors = w.isJackpot 
-              ? ["#ffd700", "#ffcc00", "#ffffff", "#ff8800"]
-              : w.isWild
-              ? ["#ff0055", "#00ffff", "#ffff00", "#00ff66", "#9900ff"]
-              : ["#00ff00", "#00ffff", "#ffff00", "#ff00ff"];
-
-            confetti({
-              particleCount: 70 + (w.isJackpot ? 60 : 0) + activeCombo * 20,
-              spread: 70,
-              origin: { y: 0.6, x: side === "left" ? 0.25 : 0.75 },
-              colors: confettiColors,
-            });
-          }
-
-          let floatTxt = `+${pts}`;
-          if (w.isJackpot) floatTxt = "+2 👑 JACKPOT!";
-          else if (w.isWild) floatTxt = "+1 🌈 WILD!";
-          else if (activeCombo >= 2) floatTxt = `+1 🔥x${activeCombo}`;
-
-          spawnFloatingText(floatTxt, w.isJackpot ? "#ffd700" : "var(--holo-1)", laneStr);
-          setRandomWinMeme(side);
-          updateComboUI();
-          updateMatchPointBanner();
-
-          // Comprobar victoria de set con la regla estricta de Muerte Súbita (ventaja de 2 puntos)
-          const setWinner = checkSetVictory();
-          if (setWinner) {
-            sayShoutcast("set_win", setWinner === "left" ? leftName : rightName);
-            setTimeout(() => {
-              $(laneStr).classList.remove("flash-win");
-              $(otherLaneStr).classList.remove("flash-win");
-              finishRound(setWinner);
-            }, 400);
-            return;
-          }
-
-          // Breather y reinicio limpio de la siguiente jugada
-          currentDelay = INITIAL_DELAY;
-          updateSpeedometer();
-          cardsSinceLastWin = 0;
-
-          setTimeout(() => {
-            $(laneStr).classList.remove("flash-win");
-            $(otherLaneStr).classList.remove("flash-win");
-            resetCardEl($("cardLeft"));
-            resetCardEl($("cardRight"));
-            isResolvingTap = false;
-            if (gameActive) {
-              newCard();
-              scheduleNextCard();
-            }
-          }, 450);
-
+          showPopToast(res.msg, `PUNTO PARA ${tapperName}`, true);
         } else {
-          // Error / Bomba / Trampa 76 / Pulsación en falso
-          if (side === "left") {
-            comboLeft = 0;
-            scoreLeft = Math.max(0, scoreLeft - 1); // Suelo en 0 para no romper el estado
-            $("scoreLeft").textContent = scoreLeft;
-            $(laneStr).classList.add("flash-fail");
+          laneEl.classList.add("flash-fail");
+          playFailSound();
+          speakText(res.reason === "trap_7_6" ? "¡Trampa siete seis!" : "¡Fallo!");
+
+          if (rivalSide === "left") {
+            scoreLeft += 1;
           } else {
-            comboRight = 0;
-            scoreRight = Math.max(0, scoreRight - 1); // Suelo en 0
-            $("scoreRight").textContent = scoreRight;
-            $(laneStr).classList.add("flash-fail");
+            scoreRight += 1;
           }
-
-          triggerHaptic("fail");
-
-          if (w.isBomb) {
-            playBombSound();
-            sayFail(true, false);
-            spawnFloatingText("💣 ¡BOOM! -1", "var(--holo-4)", laneStr);
-          } else if (w.isTrap) {
-            playFailSound();
-            sayFail(false, true);
-            spawnFloatingText("⚡ 7-6 TRAMPA! -1", "var(--holo-4)", laneStr);
-          } else {
-            playFailSound();
-            sayFail(false, false);
-            spawnFloatingText("-1", "var(--holo-4)", laneStr);
-          }
-
-          document.body.classList.add("shake");
-          setTimeout(() => document.body.classList.remove("shake"), 320);
-
-          updateComboUI();
-          updateMatchPointBanner();
-
-          currentDelay = INITIAL_DELAY;
-          updateSpeedometer();
-          cardsSinceLastWin = 0;
-
-          setTimeout(() => {
-            $(laneStr).classList.remove("flash-fail");
-            $(otherLaneStr).classList.remove("flash-fail");
-            resetCardEl($("cardLeft"));
-            resetCardEl($("cardRight"));
-            isResolvingTap = false;
-            if (gameActive) {
-              newCard();
-              scheduleNextCard();
-            }
-          }, 450);
+          streakLeft = 0;
+          streakRight = 0;
+          showPopToast(res.msg || "❌ ¡FALLO!", `FALLO DE ${tapperName} · +1 ${rivalName}`, false);
         }
-      }
 
-      function finishRound(winnerSide) {
-        gameActive = false;
-        isResolvingTap = false;
-        clearTimeout(cardTimer);
-        clearAITimer();
-        triggerHaptic("round-win");
-        playVictoryFanfare();
+        updateScoreHUD();
 
-        const banner = $("matchPointBanner");
-        if (banner) banner.style.display = "none";
-
-        const winnerName =
-          winnerSide === "left"
-            ? leftName.replace("👑 ", "")
-            : rightName.replace("👑 ", "");
-        const loserName =
-          winnerSide === "left"
-            ? rightName.replace("👑 ", "")
-            : leftName.replace("👑 ", "");
-
-        if (mode === "duel" || mode === "ai") {
-          $("duelWinnerName").textContent = winnerName;
-          const isSudden = (scoreLeft >= 2 && scoreRight >= 2);
-          let detail = isSudden
-            ? `⚡ Victoria en Muerte Súbita (${scoreLeft} - ${scoreRight})`
-            : `Marcador final: ${scoreLeft} - ${scoreRight}`;
-          if (mode === "ai") {
-            if (winnerSide === "left") {
-              detail += " · ¡Has vencido a la IA!";
-            } else {
-              detail += " · Victoria de Cortex-AI";
-            }
-          }
-          const detailEl = $("duelWinnerDetail");
-          if (detailEl) detailEl.textContent = detail;
-          $("duelEnd").classList.add("active");
+        const setWinner = checkSetWinner();
+        if (setWinner) {
+          gameActive = false;
+          resolveTimer = setTimeout(() => {
+            laneEl.classList.remove("flash-win", "flash-fail");
+            finishRound(setWinner);
+          }, 680);
           return;
         }
 
-        if (!stats[winnerName]) stats[winnerName] = { wins: 0, maxStreak: 0 };
-        stats[winnerName].wins++;
+        const deuceAt = targetPoints - 1;
+        // Si acaban de empatar en Muerte Súbita (ej. 4-4), anunciarlo
+        if (scoreLeft >= deuceAt && scoreRight >= deuceAt && scoreLeft === scoreRight) {
+          speechTimer = setTimeout(() => speakText("¡Muerte súbita! Hay que ganar de dos"), 320);
+        }
 
-        if (kingIdx === null) {
-          kingIdx = players.indexOf(winnerName);
-          challengerIdx = 2 % players.length;
-          currentStreak = 1;
-          stats[winnerName].maxStreak = Math.max(stats[winnerName].maxStreak, 1);
-          $("roundEmoji").textContent = "👑";
-          $("roundTitle").textContent = "¡Tenemos Rey!";
-          $("roundWinnerName").textContent = winnerName;
-          $("roundDetail").textContent = `venció a ${loserName}`;
-        } else {
-          const winnerWasKing = kingIdx === players.indexOf(winnerName);
-          if (winnerWasKing) {
+        resolveTimer = setTimeout(() => {
+          laneEl.classList.remove("flash-win", "flash-fail");
+          resetCardEl("cardLeft");
+          resetCardEl("cardRight");
+          isResolvingTap = false;
+          if (gameActive) newCard();
+        }, 760);
+      }
+
+      function finishRound(winnerSide) {
+        isResolvingTap = false;
+        if (typeof confetti === "function") {
+          confetti({ particleCount: 100, spread: 75, origin: { y: 0.55 } });
+        }
+
+        const deuceAt = targetPoints - 1;
+        const wasSuddenDeath = scoreLeft >= deuceAt && scoreRight >= deuceAt;
+        const scoreSummary = `${bottomName} [${scoreLeft}] - [${scoreRight}] ${topName}${
+          wasSuddenDeath ? " · ¡GANADO POR 2 EN MUERTE SÚBITA!" : ""
+        }`;
+
+        if (mode === "duel" || mode === "ai") {
+          const wName = winnerSide === "left" ? bottomName : topName;
+          $("duelEmoji").textContent = wasSuddenDeath ? "⚡🏆" : "🏆";
+          $("duelTitle").textContent = wasSuddenDeath
+            ? "¡Victoria en Muerte Súbita!"
+            : "¡Ganador del Duelo!";
+          $("duelWinner").textContent = wName;
+          $("duelScoreSub").textContent = scoreSummary;
+          $("duelEnd").classList.add("active");
+          speakText(`¡Gana ${wName}!`);
+        } else if (mode === "king") {
+          const winnerIdx = winnerSide === "left" ? kingIdx : challengerIdx;
+          const loserIdx = winnerSide === "left" ? challengerIdx : kingIdx;
+          const winnerName = players[winnerIdx];
+
+          if (winnerSide === "left") {
             currentStreak++;
-            stats[winnerName].maxStreak = Math.max(stats[winnerName].maxStreak, currentStreak);
-            $("roundEmoji").textContent = "👑";
-            $("roundTitle").textContent = "¡Sigue reinando!";
-            $("roundWinnerName").textContent = winnerName;
-            $("roundDetail").textContent = `racha de ${currentStreak}`;
           } else {
-            stats[winnerName].maxStreak = Math.max(stats[winnerName].maxStreak, 1);
-            $("roundEmoji").textContent = "⚔️";
-            $("roundTitle").textContent = "¡Destrono!";
-            $("roundWinnerName").textContent = `${winnerName} destrona a ${loserName}`;
-            $("roundDetail").textContent = "nuevo rey";
-            kingIdx = challengerIdx;
             currentStreak = 1;
           }
-          challengerIdx = (challengerIdx + 1) % players.length;
-          if (challengerIdx === kingIdx) challengerIdx = (challengerIdx + 1) % players.length;
+
+          stats[winnerName].wins++;
+          if (currentStreak > stats[winnerName].streak) {
+            stats[winnerName].streak = currentStreak;
+          }
+
+          queue.push(loserIdx);
+          kingIdx = winnerIdx;
+          challengerIdx = queue.shift();
+
+          $("roundEmoji").textContent = "👑";
+          $("roundTitle").textContent = `¡Sigue en pista! (Racha x${currentStreak})`;
+          $("roundWinner").textContent = winnerName;
+          $("roundScoreSub").textContent = scoreSummary;
+
+          const rk = $("rankingList");
+          rk.innerHTML = "";
+          Object.keys(stats)
+            .sort((a, b) => stats[b].wins - stats[a].wins || stats[b].streak - stats[a].streak)
+            .forEach((p) => {
+              const row = document.createElement("div");
+              row.className = "ranking-row";
+              row.innerHTML = `<span>${p === winnerName ? "👑 " : ""}${p}</span><span style="color:var(--holo-1)">${stats[p].wins} victorias · Racha máx: ${stats[p].streak}</span>`;
+              rk.appendChild(row);
+            });
+
+          $("roundEnd").classList.add("active");
+          speakText(`¡${winnerName} es el rey de la pista!`);
         }
-        $("roundEnd").classList.add("active");
       }
 
-      function nextRound() {
-        hideModal("roundEnd");
-        showPrematch();
-      }
-      function restartDuel() {
-        hideModal("duelEnd");
-        if (mode === "ai") {
-          startAIMatch();
-        } else {
-          goDuel();
-        }
-      }
-      function endTournament() {
-        hideModal("roundEnd");
-        const ranked = Object.entries(stats)
-          .map(([name, s]) => ({ name, ...s }))
-          .sort((a, b) => b.maxStreak - a.maxStreak || b.wins - a.wins);
-        const champ = ranked[0] || { name: "Nadie", maxStreak: 0, wins: 0 };
-        $("finalKingName").textContent = champ.name;
-        $("finalKingDetail").textContent = `racha máxima de ${champ.maxStreak}`;
-        $("lbRows").innerHTML = ranked
-          .map(
-            (p, i) =>
-              `<div class="lb-row ${i === 0 ? "first" : ""}">
-        <div class="lb-rank">${i === 0 ? "👑" : i + 1}</div>
-        <div class="lb-name">${escapeHtml(p.name)}</div>
-        <div class="lb-wins">${p.wins} ${p.wins === 1 ? "victoria" : "victorias"} · racha ${p.maxStreak}</div>
-      </div>`,
-          )
-          .join("");
-        $("tournamentEnd").classList.add("active");
-      }
-
-      // ====== EVENTOS Y CONTROLES (TOUCH + MOUSE + KEYBOARD) ======
-      document.addEventListener("click", (e) => {
-        const rm = e.target.closest("[data-remove]");
-        if (rm) {
-          removePlayer(rm.getAttribute("data-remove"));
-        }
-      });
-
-      $("playerInput").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          addPlayer();
-        }
-      });
-
-      let audioUnlocked = false;
-      function unlockAudio() {
-        if (audioUnlocked) return;
-        audioUnlocked = true;
-        try { getAudioCtx(); } catch (e) {}
-        try { initSpeech(); } catch (e) {}
-      }
-      window.addEventListener("pointerdown", unlockAudio, { once: true });
-      window.addEventListener("touchstart", unlockAudio, { once: true, passive: true });
-      window.addEventListener("click", unlockAudio, { once: true });
-      window.addEventListener("keydown", unlockAudio, { once: true });
-
+      // ====== EVENTOS TÁCTILES Y DE TECLADO (TOCAR LAS CARTAS O TU LADO) ======
       function attachLaneTap(laneId, side) {
         const zone = $(laneId);
         if (!zone) return;
@@ -3129,30 +1919,29 @@
         const handler = (e) => {
           if (!gameActive || isResolvingTap) return;
           if (e && e.cancelable) e.preventDefault();
-          const now = Date.now();
-          if (now - lastTap < 80) return;
+          const now = performance.now();
+          if (now - lastTap < 160) return;
           lastTap = now;
-          tap(side);
+          // En modo solitario contra la IA, tocar cualquiera de las dos cartas suma para el jugador humano ('left')
+          const effectiveSide = mode === "ai" ? "left" : side;
+          tap(effectiveSide);
         };
+        zone.addEventListener("pointerdown", handler);
         zone.addEventListener("touchstart", handler, { passive: false });
-        zone.addEventListener("mousedown", handler);
       }
+
       attachLaneTap("laneLeft", "left");
       attachLaneTap("laneRight", "right");
 
-      // Soporte completo de teclado para jugar en Laptop / PC
       window.addEventListener("keydown", (e) => {
-        if (!gameActive || isResolvingTap) return;
-        // Evitar intervenir si el usuario está escribiendo en el input de setup
-        if (document.activeElement && document.activeElement.tagName === "INPUT") return;
-
-        const code = e.code;
-        if (code === "KeyA" || code === "KeyW" || code === "Space") {
+        if (!gameActive || isResolvingTap || e.repeat) return;
+        const k = e.key.toLowerCase();
+        if (k === "a" || k === "s" || k === " " || k === "arrowleft") {
           e.preventDefault();
           tap("left");
-        } else if (code === "KeyL" || code === "KeyP" || code === "Enter" || code === "ArrowRight" || code === "ArrowUp") {
+        } else if (k === "l" || k === "p" || k === "enter" || k === "arrowright" || k === "arrowup") {
           e.preventDefault();
-          tap("right");
+          tap(mode === "ai" ? "left" : "right");
         }
       });
     </script>

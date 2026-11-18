@@ -1,30 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  
-  --animate-shake: shake 0.3s cubic-bezier(.36,.07,.19,.97) infinite;
-  
-  --keyframes-shake: {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-  }
+:root {
+  --holo-1: #ccff00;
+  --holo-2: #ff00ff;
+  --holo-3: #00ffff;
+  --holo-4: #ff2200;
+  --bg-deep: #111111;
 }
 
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html,
 body {
-  font-family: var(--font-sans);
-  background-color: #0f172a;
-  color: white;
-  overflow: hidden;
-  touch-action: none; /* Prevent scroll/bounce on swipe */
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Space Mono", monospace;
+  background-color: var(--bg-deep);
+  color: #ffffff;
+  touch-action: manipulation;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 2px, transparent 2px);
+  background-size: 32px 32px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.font-anton {
+  font-family: "Anton", sans-serif;
+}
+
+.font-marker {
+  font-family: "Permanent Marker", cursive;
+}
+
+.font-mono-space {
+  font-family: "Space Mono", monospace;
+}
+
+.text-stroke-black {
+  -webkit-text-stroke: 2px #000000;
+}
+
+.text-stroke-black-lg {
+  -webkit-text-stroke: 3px #000000;
+}
+
+.brutal-shadow-cyan {
+  box-shadow: 6px 6px 0px var(--holo-3);
+}
+
+.brutal-shadow-magenta {
+  box-shadow: 6px 6px 0px var(--holo-2);
+}
+
+.brutal-shadow-lime {
+  box-shadow: 6px 6px 0px var(--holo-1);
+}
+
+.brutal-shadow-red {
+  box-shadow: 6px 6px 0px var(--holo-4);
+}
+
+.brutal-shadow-white {
+  box-shadow: 5px 5px 0px #ffffff;
+}
+
+.brutal-shadow-black {
+  box-shadow: 6px 6px 0px #000000;
+}
+
+@keyframes shakeHard {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  15% { transform: translate(-8px, -4px) rotate(-2deg); }
+  30% { transform: translate(8px, 4px) rotate(2deg); }
+  45% { transform: translate(-6px, 4px) rotate(-1.5deg); }
+  60% { transform: translate(6px, -4px) rotate(1.5deg); }
+  75% { transform: translate(-4px, 2px) rotate(-1deg); }
+}
+
+.animate-shake-hard {
+  animation: shakeHard 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes rainbowBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card-rainbow {
+  background: linear-gradient(135deg, #ccff00, #00ffff, #ff00ff, #ff2200, #ccff00);
+  background-size: 300% 300%;
+  animation: rainbowBg 3s ease infinite;
 }
